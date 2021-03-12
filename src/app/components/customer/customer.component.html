@@ -1,6 +1,8 @@
 <h2 class="text-center">Müşteri Listesi</h2>
-<div *ngIf="dataLoaded==false" class="spinner-border text-success" role="status">
-    <span class="visually-hidden">Loading...</span>
+<div class="d-flex justify-content-center">
+    <div *ngIf="dataLoaded==false" class="spinner-border text-success" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
 </div>
 <table *ngIf="dataLoaded==true" class="table table-success table-striped">
     <thead>
