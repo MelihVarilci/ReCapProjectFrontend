@@ -1,0 +1,18 @@
+<h2 class="text-center">Müşteri Listesi</h2>
+<div *ngIf="dataLoaded==false" class="spinner-border text-success" role="status">
+    <span class="visually-hidden">Loading...</span>
+</div>
+<table *ngIf="dataLoaded==true" class="table table-success table-striped">
+    <thead>
+        <tr>
+            <th>Müşteri No</th>
+            <th>Müşteri</th>
+            <th>Şirket</th>
+        </tr>
+    </thead>
+    <tr *ngFor="let customer of customers">
+        <td>{{customer.cutomerId}}</td>
+        <td>{{customer.firstName + " " + customer.lastName}}</td>
+        <td>{{customer.companyName}}</td>
+    </tr>
+</table>

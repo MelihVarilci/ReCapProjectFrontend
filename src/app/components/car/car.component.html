@@ -1,0 +1,24 @@
+<h2 class="text-center">Araba Listesi</h2>
+<div *ngIf="dataLoaded==false" class="spinner-border text-success" role="status">
+    <span class="visually-hidden">Loading...</span>
+</div>
+<table *ngIf="dataLoaded==true" class="table table-success table-striped">
+    <thead>
+        <tr>
+            <th>Araba Numarası</th>
+            <th>Marka Numarası</th>
+            <th>Renk Numarası</th>
+            <th>Modeli</th>
+            <th>Günlük Kirası</th>
+            <th>Açıklama</th>
+        </tr>
+    </thead>
+    <tr *ngFor="let car of cars">
+        <td>{{car.carId}}</td>
+        <td>{{car.brandName}}</td>
+        <td>{{car.colorName}}</td>
+        <td>{{car.carModelYear}}</td>
+        <td>{{car.carDailyPrice}}</td>
+        <td>{{car.carDescription}}</td>
+    </tr>
+</table>
