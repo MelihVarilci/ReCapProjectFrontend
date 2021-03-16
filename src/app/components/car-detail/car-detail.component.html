@@ -1,0 +1,47 @@
+<div *ngIf="dataLoaded==false" class="d-flex justify-content-center">
+  <div class="spinner-border text-success" role="status">
+      <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+<div *ngIf="dataLoaded==true" class="card mb-3">
+  <div *ngFor="let car of cars" class="card-header text-center">
+    <strong>
+        {{car.brandName}} - {{car.carModelYear}}
+    </strong>
+  </div>
+  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div *ngFor="let carImage of carImages let i = index" [class]="getSliderClassName(i)">
+        <img src="{{apiUrl}}{{carImage.imagePath}}" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <table class="table table-success table-striped">
+      <thead>
+          <tr>
+              <th>Araba Numarası</th>
+              <th>Marka</th>
+              <th>Renk</th>
+              <th>Model</th>
+              <th>Günlük Kirası</th>
+              <th>Açıklama</th>
+          </tr>
+      </thead>
+      <tr *ngFor="let car of cars">
+          <td>{{car.carId}}</td>
+          <td>{{car.brandName}}</td>
+          <td>{{car.colorName}}</td>
+          <td>{{car.carModelYear}}</td>
+          <td>{{car.carDailyPrice}}</td>
+          <td>{{car.carDescription}}</td>
+      </tr>
+  </table>
+</div>

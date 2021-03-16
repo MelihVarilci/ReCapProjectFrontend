@@ -1,9 +1,9 @@
 /*
 {
-    "carId": 0,
+    "carId": 1,
     "brandName": "Ford",
     "colorName": "Kırmızı",
-    "carModelYear": null,
+    "carModelYear": 2018,
     "carDailyPrice": 120,
     "carDescription": "Öğretmenden"
 }
