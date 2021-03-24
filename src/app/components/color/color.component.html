@@ -6,13 +6,22 @@
     </div>
   </div>
 </ul>
+<div class="mb-3">
+  <label for="filterColorText" class="form-label">Renk Ara</label>
+  <input type="text" [(ngModel)]="filterColorText" id="filterColorText"
+  class="form-control"
+  placeholder="Renk Giriniz...">
+</div>
 <ul *ngIf="dataLoaded==true" class="list-group">
+  <li routerLink="/cars"
+  [ngClass]="getAllColorClass()"
+  (click)="removeCurrentColor()">Tüm Renkler</li><br>
+
   <li class="list-group-item active" aria-current="true">Renkler</li>
 
   <li (click)="setCurrentColor(color)"
   routerLink="/cars/color/{{color.colorId}}" 
-  *ngFor="let color of colors" 
-  [class]="getCurrentColorClass(color)">{{color.colorName}}</li>
+  *ngFor="let color of colors | filterColorPipe:filterColorText" 
+  [class]="getCurrentColorClass(color)">{{color.colorName |uppercase}}</li>
   
 </ul>
-<h5 *ngIf="currentColor">{{currentColor.colorName}} seçtiniz</h5>

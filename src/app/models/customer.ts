@@ -1,6 +1,6 @@
 /*
 {
-    "cutomerId": 1,
+    "customerId": 1,
     "userId": 1006,
     "companyName": "MV",
     "firstName": "Melih",
@@ -11,7 +11,7 @@
 data, message, success
 */
 export interface Customer{
-    cutomerId:number,
+    customerId:number,
     userId:number,
     companyName:string,
     firstName:string,

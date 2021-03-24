@@ -6,14 +6,23 @@
     </div>
   </div>
 </ul>
+
+<div class="mb-3">
+  <label for="filterBrandText" class="form-label">Marka Ara</label>
+  <input type="text" [(ngModel)]="filterBrandText" id="filterBrandText"
+  class="form-control"
+  placeholder="Marka Giriniz...">
+</div>
+
 <ul *ngIf="dataLoaded==true" class="list-group">
   <li routerLink="/cars"
-  class="list-group-item">Tüm Markalar</li><br>
+  [ngClass]="getAllBrandClass()"
+  (click)="removeCurrentBrand()">Tüm Markalar</li><br>
   
   <li class="list-group-item active" aria-current="true">Markalar</li>
 
   <li (click)="setCurrentBrand(brand)"
     routerLink="/cars/brand/{{brand.brandId}}"
-    *ngFor="let brand of brands" 
-    [class]="getCurrentBrandClass(brand)">{{brand.brandName}}</li>  
+    *ngFor="let brand of brands | filterBrandPipe:filterBrandText" 
+    [class]="getCurrentBrandClass(brand)">{{brand.brandName |uppercase}}</li>  
 </ul>

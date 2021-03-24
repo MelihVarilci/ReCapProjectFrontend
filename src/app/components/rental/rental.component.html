@@ -1,24 +1,113 @@
-<h2 class="text-center">Kiralama Listesi</h2>
-<div class="d-flex justify-content-center">
-    <div *ngIf="dataLoaded==false" class="spinner-border text-success" role="status">
-        <span class="visually-hidden">Loading...</span>
-    </div>
+<!-- Button trigger modal -->
+<div class="d-grid gap-2">
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal"
+  >
+    Aracı Kirala
+  </button>
 </div>
-<table *ngIf="dataLoaded==true" class="table table-success table-striped">
-    <thead>
-        <tr>
-            <th>Marka</th>
-            <th>Renk</th>
-            <th>Müşteri</th>
-            <th>Kiralama Tarihi</th>
-            <th>Teslim Alma Tarihi</th>
-        </tr>
-    </thead>
-    <tr *ngFor="let rental of rentals">
-        <td>{{rental.brandName}}</td>
-        <td>{{rental.colorName}}</td>
-        <td>{{rental.firstName + " " +rental.lastName}}</td>
-        <td>{{rental.rentDate}}</td>
-        <td>{{(rental.returnDate == null)? "Teslim Alınmadı": rental.returnDate | date:'dd--MM-YYYY'}}</td>
-    </tr>
-</table>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          {{ car.brandName }} - {{ car.colorName }} | Aracı Kirala
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row mb-2">
+          <label for="example-date-input" class="col-4 col-form-label"
+            >Günlük</label
+          >
+          <div class="col-8">
+            <input
+              type="text"
+              disabled="disabled"
+              class="form-control"
+              [value]="car.carDailyPrice | currency: '₺'"
+            />
+          </div>
+        </div>
+        <div class="form-group row mb-2">
+          <label for="example-date-input" class="col-4 col-form-label"
+            >Müşteri</label
+          >
+          <div class="col-8">
+            <select class="form-select" [(ngModel)]="customerId">
+              <option
+                [ngValue]="customer.customerId"
+                *ngFor="let customer of customers"
+              >
+                {{ customer.firstName }} {{ customer.lastName }} |
+                {{ customer.companyName }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row mb-2">
+          <label for="example-date-input" class="col-4 col-form-label"
+            >Başlangıç</label
+          >
+          <div class="col-8">
+            <input
+              (change)="onChangeEvent($event)"
+              min="{{ getRentMinDate() }}"
+              [(ngModel)]="rentDate"
+              type="date"
+              class="form-control"
+              id="rent-date"
+              placeholder="Bir gün seçiniz."
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="example-date-input" class="col-4 col-form-label"
+            >Bitiş</label
+          >
+          <div class="col-8">
+            <input
+              disabled="{{ !firstDateSelected }}"
+              min="{{ getReturnMinDate() }}"
+              max="{{ getReturnMaxDate() }}"
+              [(ngModel)]="returnDate"
+              type="date"
+              class="form-control"
+              id="return-date"
+              placeholder="Bir gün seçiniz."
+            />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Kapat
+        </button>
+        <button
+          data-bs-dismiss="modal"
+          (click)="createRental()"
+          type="button"
+          class="btn btn-primary"
+        >
+          Kirala
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

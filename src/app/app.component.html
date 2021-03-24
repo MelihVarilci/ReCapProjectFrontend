@@ -2,16 +2,20 @@
 <div class="container">
   <app-navi></app-navi>
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-2">
       <div class="mt-5">
         <app-brand></app-brand>
       </div>
+    </div>
+    <div class="col-md-8 mt-5">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="col-md-2">
       <div class="mt-5">
         <app-color></app-color>
       </div>
     </div>
-    <div class="col-md-9 mt-5">
-      <router-outlet></router-outlet>
-    </div>
   </div>
 </div>
+
+

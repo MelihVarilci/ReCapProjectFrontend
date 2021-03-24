@@ -12,7 +12,8 @@ export class CarComponent implements OnInit {
   cars:Car[] = [];
   dataLoaded = false;
 
-  constructor(private carService:CarService, private activatedRoute:ActivatedRoute) { }
+  constructor(private carService:CarService, 
+    private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {

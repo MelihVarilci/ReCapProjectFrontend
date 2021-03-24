@@ -13,14 +13,13 @@ import { CarService } from 'src/app/services/car.service';
 })
 export class CarDetailComponent implements OnInit {
   carImages: CarImage[] = [];
-  cars: Car[] = [];
+  cars: Car;
   dataLoaded = false;
   apiUrl : string = "https://localhost:44352";
   
   constructor(private carService: CarService,
     private carImageService:CarImageService,
-    private activatedRoute: ActivatedRoute,
-    //private config:NgbCarouselConfig
+    private activatedRoute: ActivatedRoute
     ) { }
 
   ngOnInit(): void {
@@ -34,7 +33,7 @@ export class CarDetailComponent implements OnInit {
 
   getCarDetailsByCarId(carId:number){
     this.carService.getCarDetailsByCarId(carId).subscribe(response => {
-      this.cars = response.data;
+      this.cars = response.data[0];
       this.dataLoaded = true;
     });
   }

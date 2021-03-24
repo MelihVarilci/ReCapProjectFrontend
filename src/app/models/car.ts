@@ -15,5 +15,6 @@ export interface Car{
     colorName:string,
     carModelYear:number,
     carDailyPrice:number,
-    carDescription:string
+    carDescription:string,
+    status:boolean
 }

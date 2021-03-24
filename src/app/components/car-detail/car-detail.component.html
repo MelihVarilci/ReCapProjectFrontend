@@ -1,47 +1,93 @@
-<div *ngIf="dataLoaded==false" class="d-flex justify-content-center">
+<div *ngIf="dataLoaded == false" class="d-flex justify-content-center">
   <div class="spinner-border text-success" role="status">
-      <span class="visually-hidden">Loading...</span>
+    <span class="visually-hidden">Loading...</span>
   </div>
 </div>
-<div *ngIf="dataLoaded==true" class="card mb-3">
-  <div *ngFor="let car of cars" class="card-header text-center">
-    <strong>
-        {{car.brandName}} - {{car.carModelYear}}
-    </strong>
+<div *ngIf="dataLoaded == true" class="mx-auto">
+  <div class="card-header text-center">
+    <strong> {{ cars.brandName }} - {{ cars.carModelYear }} </strong>
   </div>
-  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div *ngFor="let carImage of carImages let i = index" [class]="getSliderClassName(i)">
-        <img src="{{apiUrl}}{{carImage.imagePath}}" class="d-block w-100" alt="...">
+  <div
+    id="carImageSlide"
+    class="carousel slide carousel-fade"
+    data-bs-ride="carousel"
+  >
+    <div
+      class="carousel-inner d-flex"
+      style="height: 70vh; width: 80vh; margin-left: 18vh"
+    >
+      <div
+        *ngFor="let carImage of carImages; index as i; first as firstImage"
+        class="carousel-item align-self-center"
+        [ngClass]="{ active: firstImage }"
+        style="height: 100%; width: 100%"
+      >
+        <img
+          src="{{ apiUrl }}{{ carImage.imagePath }}"
+          class=""
+          style="height: 100%; width: 100%"
+        />
+      </div>
+
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carImageSlide"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carImageSlide"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    <table class="table table-striped mt-2">
+      <tbody>
+        <tr>
+          <th scope="row">Marka</th>
+          <td>{{ cars.brandName }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Model Yılı</th>
+          <td>{{ cars.carModelYear }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Renk</th>
+          <td>{{ cars.colorName }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Fiyat</th>
+          <td>
+            {{
+              cars.carDailyPrice | currency: "TRY":"symbol-narrow":"1.2-2"
+            }}/Gunluk
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Aciklama</th>
+          <td>{{ cars.carDescription }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <div class="card-body d-grid gap-2 mx-auto">
+        <div *ngIf="cars.status == true" class="btn-group me-2">
+          <div style="margin: auto;">
+            <app-rental [car]="cars"></app-rental>
+          </div>
+        </div>
+      </div>
+      <div class="d-grid gap-2 mb-2" *ngIf="cars.status == false">
+        <div class="alert alert-danger">Araç Şuan Kiralanamaz</div>
       </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
   </div>
-  <table class="table table-success table-striped">
-      <thead>
-          <tr>
-              <th>Araba Numarası</th>
-              <th>Marka</th>
-              <th>Renk</th>
-              <th>Model</th>
-              <th>Günlük Kirası</th>
-              <th>Açıklama</th>
-          </tr>
-      </thead>
-      <tr *ngFor="let car of cars">
-          <td>{{car.carId}}</td>
-          <td>{{car.brandName}}</td>
-          <td>{{car.colorName}}</td>
-          <td>{{car.carModelYear}}</td>
-          <td>{{car.carDailyPrice}}</td>
-          <td>{{car.carDescription}}</td>
-      </tr>
-  </table>
 </div>
