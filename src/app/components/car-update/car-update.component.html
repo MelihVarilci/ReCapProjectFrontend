@@ -1,0 +1,106 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="title font-weight-bold">Araç Güncelle</h5>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="carUpdateForm">
+      <div class="row">
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="brandId">Markalar </label>
+            <div class="form-group">
+              <select
+                id="brandId"
+                class="form-select"
+                formControlName="brandId"
+              >
+                <option [ngValue]="brand.brandId" *ngFor="let brand of brands">
+                  {{ brand.brandName }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="colorId">Renkler </label>
+            <div class="form-group">
+              <select
+                id="colorId"
+                class="form-select"
+                formControlName="colorId"
+              >
+                <option [ngValue]="color.colorId" *ngFor="let color of colors">
+                  {{ color.colorName }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="mb-3">
+          <label for="brandName">Araç adı</label>
+          <div class="form-group">
+            <input
+              type="text"
+              id="brandName"
+              class="form-control"
+              formControlName="brandName"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="carModelYear">Model Yılı</label>
+            <div class="form-group">
+              <input
+                type="number"
+                id="carModelYear"
+                class="form-control"
+                formControlName="carModelYear"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="carDailyPrice">Günlük Fiyatı</label>
+            <div class="form-group">
+              <input
+                type="number"
+                id="carDailyPrice"
+                class="form-control"
+                formControlName="carDailyPrice"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="mb-3">
+          <label for="carDescription">Araç Tanımı</label>
+          <div class="form-group">
+            <input
+              type="text"
+              id="carDescription"
+              class="form-control"
+              formControlName="carDescription"
+            />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="card-footer">
+    <button
+      class="btn btn-fill btn-primary"
+      [routerLink]="['/cars']"
+      (click)="updateCar()"
+    >
+      Araç Bilgilerini Güncelle
+    </button>
+  </div>
+</div>

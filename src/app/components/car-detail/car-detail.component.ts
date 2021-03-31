@@ -42,7 +42,6 @@ export class CarDetailComponent implements OnInit {
     this.carImageService.getCarImagesByCarId(carId).subscribe(response => {
       this.carImages = response.data;
       this.dataLoaded = true;
-      console.log(response.data);
     })
   }
 

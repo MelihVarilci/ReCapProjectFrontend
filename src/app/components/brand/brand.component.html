@@ -15,10 +15,14 @@
 </div>
 
 <ul *ngIf="dataLoaded==true" class="list-group">
+  
+  <button class="btn btn-success w-100" routerLink="/brand/add">
+    Marka Ekle
+  </button><br>
   <li routerLink="/cars"
   [ngClass]="getAllBrandClass()"
   (click)="removeCurrentBrand()">Tüm Markalar</li><br>
-  
+
   <li class="list-group-item active" aria-current="true">Markalar</li>
 
   <li (click)="setCurrentBrand(brand)"

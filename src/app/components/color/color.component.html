@@ -13,6 +13,10 @@
   placeholder="Renk Giriniz...">
 </div>
 <ul *ngIf="dataLoaded==true" class="list-group">
+  <button class="btn btn-success w-100" routerLink="/color/add">
+    Renk Ekle
+  </button><br>
+  
   <li routerLink="/cars"
   [ngClass]="getAllColorClass()"
   (click)="removeCurrentColor()">Tüm Renkler</li><br>

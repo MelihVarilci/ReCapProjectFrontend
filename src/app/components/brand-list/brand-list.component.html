@@ -1,0 +1,133 @@
+<div class="content">
+    <div class="col-md-12">
+      <div class="panel-footer text-center">
+        <span class="d-block p-1 bg-primary text-white" style="margin-top: 10px">
+          <h5>Markalar</h5>
+        </span>
+      </div>
+        
+      <div *ngIf="dataLoaded == false" class="spinner-border text-primary" role="status" >
+        <span class="visually-hidden">Loading...</span>
+      </div>
+        
+      <table *ngIf="dataLoaded == true" id="brandsTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Marka Adı</th>
+            <th style="text-align: center; width: 100px">
+              <button type="button" data-func="dt-add" class="btn btn-success btn-xs dt-add formButton" data-bs-toggle="modal" data-bs-target="#addBrandModal">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true">Ekle</span>
+              </button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let brand of brands">
+            <td>{{ brand.brandId }}</td>
+            <td>{{ brand.brandName }}</td>
+            <td>
+              <button type="button" class="btn btn-primary btn-xs formButton" data-bs-toggle="modal" data-bs-target="#updateBrandModal" (click)="setSelectedBrandToUpdate(brand)" style="margin-right: 16px">
+                <i class="fas fa-pen"></i>
+              </button>
+              <button type="button" class="btn btn-danger btn-xs formButton" data-bs-toggle="modal" data-bs-target="#deleteBrandModal" (click)="setSelectedBrandToDelete(brand)">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  
+  
+  <!--addBrandModal-->
+  <div class="modal fade" id="addBrandModal" tabindex="-1" aria-labelledby="addBrandModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="AddBrandTitle">Marka Ekle</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="brandAddForm" >
+            <div class="row">
+              <div class="col-8">
+                <label for="brandName">Marka</label>
+                <input type="text" class="form-control" id="brandName" formControlName="brandName">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button class="btn btn-success" (click)="addBrand()" data-bs-dismiss="modal" >Kaydet</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end addBrandModal-->
+  
+  
+  <!--updateBrandModal-->
+  <div class="modal fade" id="updateBrandModal" tabindex="-1" aria-labelledby="updateBrandModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateBrandTitle">Marka Güncelle</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="brandUpdateForm" *ngIf="brandUpdateForm">
+            <div class="row">
+              <div class="col-4">
+                <label for="brandId">Id</label>
+                <input type="number" class="form-control" *ngIf="selectedBrand" id="brandId" name="brandId" formControlName="brandId" value="{{selectedBrand.brandId}}" readonly>
+              </div>
+              <div class="col-8">
+                <label for="brandName">Marka</label>
+                <input type="text" class="form-control" *ngIf="selectedBrand" id="brandName" formControlName="brandName" value="{{selectedBrand.brandName}}">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button class="btn btn-primary" (click)="updateBrand()" data-bs-dismiss="modal" >Kaydet</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end updateBrandModal-->
+
+  <!--deleteBrandModal-->
+  <div class="modal fade" id="deleteBrandModal" tabindex="-1" aria-labelledby="deleteBrandModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteBrandTitle">Marka Sil</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="brandDeleteForm" *ngIf="brandDeleteForm">
+            <div class="row">
+              <div class="col-4">
+                <label for="brandId">Id</label>
+                <input type="number" class="form-control" *ngIf="selectedBrand" id="brandId" name="brandId" formControlName="brandId" value="{{selectedBrand.brandId}}" readonly>
+              </div>
+              <div class="col-8">
+                <label for="brandName">Marka</label>
+                <input type="text" class="form-control" *ngIf="selectedBrand" id="brandName" formControlName="brandName" value="{{selectedBrand.brandName}}" readonly>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button class="btn btn-danger" (click)="deleteBrand()" data-bs-dismiss="modal" >Sil</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end deleteBrandModal-->

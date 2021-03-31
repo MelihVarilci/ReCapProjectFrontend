@@ -17,8 +17,6 @@ export class CarImageService {
     return this.httpClient.get<ListResponseModel<CarImage>>(newPath);
   }
 
-  // URL YANLIŞ
-  //https://localhost:44352/api/carimages/getcarimagesbycarid?carId=1
   getCarImagesByCarId(carId:number):Observable<ListResponseModel<CarImage>>{
     let newPath = this.apiUrl + "carimages/getcarimagesbycarid?carId=" + carId;
     return this.httpClient.get<ListResponseModel<CarImage>>(newPath);
