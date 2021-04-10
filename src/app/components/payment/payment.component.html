@@ -1,4 +1,4 @@
-<div class="card mt-4">
+<div *ngIf="cars" class="card mt-4">
   <div class="card-header text-center">
     <strong>İşlem Özeti</strong>
   </div>
@@ -33,68 +33,81 @@
     </table>
   </div>
 </div>
-<div class="card mt-4">
-  <div class="card-header text-center">
-    <strong>Ödeme İşlemlemi</strong>
-  </div>
-  <div class="card-body">
-    <div class="row">
-      <div class="inputbox mt-3">
-        <span>Kart Üzerindeki Ad Soyad</span>
-        <input
-          [(ngModel)]="nameOnTheCard"
-          type="text"
-          name="name"
-          class="form-control"
-          required="required"
-        />
+<div class="row mt-4">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header fw-bold">
+        <i class="bi-credit-card me-1"></i> Kart bilgilerinizi doldurun
       </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="inputbox mt-3 mr-2">
-            <span>Kart Numarası</span>
+      <div *ngIf="cardAddForm" class="card-body">
+        <form [formGroup]="cardAddForm" (ngSubmit)="add()">
+          <div class="form-floating mb-3">
             <input
-              [(ngModel)]="cardNumber"
               type="text"
-              name="name"
+              id="nameOnTheCard"
               class="form-control"
-              required="required"
+              placeholder="nameOnTheCard"
+              formControlName="nameOnTheCard"
             />
-            <i class="fa fa-credit-card"></i>
+            <label for="nameOnTheCard">Kart Üzerindeki Ad ve Soyad</label>
           </div>
-        </div>
-        <div class="col-md-6">
-          <div class="d-flex flex-row">
-            <div class="inputbox mt-3 mr-2">
-              <span>Son Kullanım Tarihi</span>
-              <input
-                [(ngModel)]="expirationDate"
-                type="text"
-                name="name"
-                class="form-control"
-                required="required"
-              />
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              id="cardNumber"
+              class="form-control"
+              placeholder="cardNumber"
+              formControlName="cardNumber"
+            />
+            <label for="cardNumber">Kart Numarası</label>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  id="expirationDate"
+                  class="form-control"
+                  placeholder="expirationDate"
+                  formControlName="expirationDate"
+                />
+                <label for="expirationDate">Son Kullanım Tarihi</label>
+              </div>
             </div>
-            <div class="inputbox mt-3 mr-2">
-              <span>Güvenlik Kodu</span>
-              <input
-                [(ngModel)]="cardCvv"
-                type="text"
-                name="name"
-                class="form-control"
-                required="required"
-              />
+            <div class="col-lg-6">
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  id="cardCvv"
+                  class="form-control"
+                  placeholder="cardCvv"
+                  formControlName="cardCvv"
+                />
+                <label for="cardCvv">CVV</label>
+              </div>
             </div>
           </div>
-        </div>
+          <div class="form-check mb-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="save"
+              formControlName="save"
+            />
+            <label class="form-check-label" for="save">
+              Kart bilgilerimin kayıt edilmesini istiyorum.
+            </label>
+          </div>
+          <div class="text-end">
+            <button class="btn btn-primary">
+              <i class="bi-credit-card-2-back me-1"></i> Ödeme Yap
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-  <div class="card-footer">
-    <div class="row">
-      <button (click)="rentACar()" class="btn btn-success">
-        <strong>{{ amountOfPayment | currency: "₺" }} </strong>Ödeme Yap
-      </button>
-    </div>
+  <div class="col-lg-6">
+    <app-card-saved (selectedCard)="setSelectedCard($event)"></app-card-saved>
   </div>
 </div>

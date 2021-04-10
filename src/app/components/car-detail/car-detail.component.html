@@ -3,7 +3,7 @@
     <span class="visually-hidden">Loading...</span>
   </div>
 </div>
-<div *ngIf="dataLoaded == true" class="mx-auto">
+<div *ngIf="dataLoaded == true && cars && carImages" class="mx-auto">
   <div class="card-header text-center">
     <strong> {{ cars?.brandName }} - {{ cars.carModelYear }} </strong>
   </div>
@@ -14,7 +14,7 @@
   >
     <div
       class="carousel-inner d-flex"
-      style="height: 70vh; width: 80vh; margin-left: 18vh"
+      style="height: 70vh; width: 80vh; margin: auto"
     >
       <div
         *ngFor="let carImage of carImages; index as i; first as firstImage"
@@ -85,7 +85,7 @@
           </div>
         </div>
       </div>
-      <div class="d-grid gap-2 mb-2" *ngIf="cars.status == false">
+      <div *ngIf="cars.status == false" class="d-grid gap-2 mb-2">
         <div class="alert alert-danger">Araç Şuan Kiralanamaz</div>
       </div>
     </div>

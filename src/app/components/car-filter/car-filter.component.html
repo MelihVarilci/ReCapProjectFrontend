@@ -1,31 +1,29 @@
+<!-- <select class="selectpicker" data-live-search="true">
+  <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
+  <option data-tokens="mustard">Burger, Shake and a Smile</option>
+  <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+</select> -->
 <div class="row mb-2">
-
   <div class="col col-4">
     <select [(ngModel)]="brandIdFilter" class="form-select">
-      <!-- <option selected>Araba Markası Seçin</option> -->
-
+      <option disabled selected>Araba Markası Seçin</option>
       <option *ngFor="let brand of brands" 
       [value]="brand.brandId"
       [selected]="getSelectedBrand(brand.brandId)">      
-        {{ brand.brandName }}
+        {{ brand.brandName }} 
       </option>
-
     </select>
   </div>
-
   <div class="col col-4">
     <select [(ngModel)] = "colorIdFilter" class="form-select">
-      <!-- <option selected>Araba Rengini Seçin</option> -->
-
+      <option disabled selected>Araba Rengini Seçin</option>
       <option *ngFor="let color of colors"
       [value]="color.colorId"
       [selected] = "getSelectedColor(color.colorId)">
         {{ color.colorName }}
       </option>
-
     </select>
   </div>
-
   <div class="col col-2">
     <div class="btn-group">
       <button
@@ -37,7 +35,6 @@
       </button>
     </div>
   </div>
-
   <div class="col col-2">
     <div class="btn-group">
       <button routerLink="/cars"
@@ -48,5 +45,4 @@
       </button>
     </div>
   </div>
-
 </div>

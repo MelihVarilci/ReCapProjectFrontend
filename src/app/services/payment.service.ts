@@ -15,7 +15,6 @@ export class PaymentService {
 
   pay(rental:Rental,amount:number){
     let path = this.apiUrl + "rentals/paymentadd";
-    //rental.returnDate = undefined;
     this.httpClient.post<ResponseModel>(path,{payment:{amount:amount},rental:rental})
   }
 }

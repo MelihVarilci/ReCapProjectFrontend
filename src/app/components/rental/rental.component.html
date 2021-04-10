@@ -47,22 +47,6 @@
         </div>
         <div class="form-group row mb-2">
           <label for="example-date-input" class="col-4 col-form-label"
-            >Müşteri</label
-          >
-          <div class="col-8">
-            <select class="form-select" [(ngModel)]="customerId">
-              <option
-                [ngValue]="customer.customerId"
-                *ngFor="let customer of customers"
-              >
-                {{ customer.firstName }} {{ customer.lastName }} |
-                {{ customer.companyName }}
-              </option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group row mb-2">
-          <label for="example-date-input" class="col-4 col-form-label"
             >Başlangıç</label
           >
           <div class="col-8">

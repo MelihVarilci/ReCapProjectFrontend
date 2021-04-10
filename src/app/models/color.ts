@@ -5,7 +5,7 @@
 }
 data, message, success
 */
-export interface Color{
-    colorId:number,
-    colorName:string
+export interface Color {
+  colorId: number;
+  colorName: string;
 }

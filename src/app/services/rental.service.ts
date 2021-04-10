@@ -11,8 +11,11 @@ import { SingleResponseModel } from '../models/singleResponseModel';
 })
 export class RentalService {
   apiUrl = 'https://localhost:44352/api/';
+  rentingCar: Rental;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+    this.getRental();
+  }
 
   getRental(): Observable<ListResponseModel<Rental>> {
     let newPath = this.apiUrl + 'rentals/getrentaldetail';
@@ -26,7 +29,11 @@ export class RentalService {
 
   addRental(rental: Rental) {
     let newPath = this.apiUrl + 'rentals/add';
-    this.httpClient.post(newPath, rental).subscribe();
+    return this.httpClient.post<ResponseModel>(newPath, rental);
+  }
+
+  getRentingCar() {
+    return this.rentingCar;
   }
 
   isCarAvailable(carId: number): Observable<ResponseModel> {

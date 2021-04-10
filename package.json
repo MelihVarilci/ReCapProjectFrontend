@@ -21,6 +21,8 @@
     "@angular/router": "~11.2.4",
     "@fortawesome/fontawesome-free": "^5.15.3",
     "bootstrap": "^5.0.0-beta2",
+    "bootstrap-select": "^1.13.18",
+    "font-awesome": "^4.7.0",
     "jquery": "^3.6.0",
     "moment": "^2.29.1",
     "ngx-toastr": "^13.2.1",

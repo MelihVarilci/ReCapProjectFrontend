@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
@@ -6,8 +7,8 @@ import { Customer } from 'src/app/models/customer';
 import { FakeCard } from 'src/app/models/fakeCard';
 import { Rental } from 'src/app/models/rental';
 import { CarService } from 'src/app/services/car.service';
-import { CustomerService } from 'src/app/services/customer.service';
 import { FakecardService } from 'src/app/services/fakecard.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { RentalService } from 'src/app/services/rental.service';
 
 @Component({
@@ -16,44 +17,33 @@ import { RentalService } from 'src/app/services/rental.service';
   styleUrls: ['./payment.component.css'],
 })
 export class PaymentComponent implements OnInit {
-  rental: Rental;
   cars: Car;
+  rental: Rental;
   customer: Customer;
   getCustomerId: number;
   amountOfPayment: number = 0;
-  nameOnTheCard: string;
-  cardNumber: string;
-  cardCvv: string;
-  expirationDate: string;
   fakeCard: FakeCard;
   cardExist: Boolean = false;
+  cardAddForm: FormGroup;
 
   constructor(
     private activateRoute: ActivatedRoute,
     private carService: CarService,
-    private customerService: CustomerService,
     private router: Router,
     private toastrService: ToastrService,
     private rentalService: RentalService,
-    private fakeCardService: FakecardService
-  ) {}
+    private fakeCardService: FakecardService,
+    private formBuilder: FormBuilder,
+    private localStorageService: LocalStorageService
+  ) { }
 
   ngOnInit(): void {
     this.activateRoute.params.subscribe((params) => {
-      console.log(params)
       if (params['rental']) {
+        this.createCardAddForm();
         this.rental = JSON.parse(params['rental']);
-        this.getCustomerId = JSON.parse(params['rental']).customerId;
-        this.getCustomerDetailById(this.getCustomerId);
         this.getCarDetail();
       }
-    });
-  }
-
-  getCustomerDetailById(customerId: number) {
-    this.customerService.getCustomerById(customerId).subscribe((response) => {
-      this.customer = response.data[0];
-      console.log(response);
     });
   }
 
@@ -66,13 +56,22 @@ export class PaymentComponent implements OnInit {
       });
   }
 
+  createCardAddForm() {
+    this.cardAddForm = this.formBuilder.group({
+      customerId: [this.localStorageService.getCurrentCustomer().customerId, [Validators.required]],
+      nameOnTheCard: ['', [Validators.required]],
+      cardNumber: ['', [Validators.required]],
+      expirationDate: ['', [Validators.required]],
+      cardCvv: ['', [Validators.required]],
+      save: [true],
+    });
+  }
+
   paymentCalculator() {
     if (this.rental.returnDate != null) {
       var date1 = new Date(this.rental.returnDate.toString());
       var date2 = new Date(this.rental.rentDate.toString());
       var difference = date1.getTime() - date2.getTime();
-
-      //zamanFark değişkeni ile elde edilen saati güne çevirmek için aşağıdaki yöntem kullanılabilir.
       var numberOfDays = Math.ceil(difference / (1000 * 3600 * 24));
 
       this.amountOfPayment = numberOfDays * this.cars.carDailyPrice;
@@ -86,44 +85,54 @@ export class PaymentComponent implements OnInit {
     }
   }
 
-  async rentACar() {
-    let fakeCard: FakeCard = {
-      nameOnTheCard: this.nameOnTheCard,
-      cardNumber: this.cardNumber,
-      expirationDate: this.expirationDate,
-      cardCvv: this.cardCvv,
-    };
-    this.cardExist = await this.isCardExist(fakeCard);
-    if (this.cardExist) {
-      this.fakeCard = await this.getFakeCardByCardNumber(this.cardNumber);
-      if (this.fakeCard.moneyInTheCard >= this.amountOfPayment) {
-        this.fakeCard.moneyInTheCard =
-          this.fakeCard.moneyInTheCard - this.amountOfPayment;
-        this.updateCard(fakeCard);
-        this.rentalService.addRental(this.rental);
-        this.toastrService.success('Arabayı kiraladınız', 'Işlem başarılı');
-      } else {
-        this.toastrService.error(
-          'Kartınızda yeterli para bulunmamaktadır',
-          'Hata'
-        );
-      }
-    } else {
-      this.toastrService.error('Bankanız bilgilerinizi onaylamadı', 'Hata');
+  add() {
+    if (this.cardAddForm.invalid) {
+      return this.toastrService.warning('Bilgilerinizi kontrol ediniz', 'Dikkat');
     }
+    if (this.cardAddForm.value.save) {
+      delete this.cardAddForm.value.save;
+      this.fakeCard = Object.assign({}, this.cardAddForm.value);
+    }
+    return this.addRental(this.rental);
   }
 
-  async isCardExist(fakeCard: FakeCard) {
-    return (await this.fakeCardService.isCardExist(fakeCard).toPromise())
-      .success;
+  addRental(rental: Rental) {
+    this.rentalService.addRental(rental).subscribe(responseSuccess => {
+      this.toastrService.success(responseSuccess.message, 'Başarılı');
+      return this.router.navigate(['']);
+    }, responseError => {
+      if (responseError.error.ValidationErrors) {
+        for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
+          this.toastrService.error(
+            responseError.error.ValidationErrors[i].ErrorMessage, 'Doğrulama Hatası'
+          );
+        }
+        return false;
+      }
+      this.toastrService.error(responseError.error.message, 'Hata');
+      return false;
+    });
   }
 
-  async getFakeCardByCardNumber(cardNumber: string) {
-    return (await this.fakeCardService.getCardByNumber(cardNumber).toPromise())
-      .data[0];
+  addCard(card: FakeCard) {
+    this.fakeCardService.add(card).subscribe(responseSuccess => {
+      return responseSuccess.success
+    }, responseError => {
+      if (responseError.error.ValidationErrors.length > 0) {
+        for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
+          this.toastrService.error(
+            responseError.error.ValidationErrors[i].ErrorMessage, 'Doğrulama Hatası'
+          );
+        }
+        return;
+      }
+      this.toastrService.error(responseError.error.Message, responseError.error.StatusCode);
+      return;
+    });
   }
 
-  updateCard(fakeCard: FakeCard) {
-    this.fakeCardService.updateCard(fakeCard);
+  setSelectedCard(cardOnEventing: FakeCard) {
+    this.fakeCard = Object.assign(cardOnEventing, { save: false });
+    this.cardAddForm.setValue(this.fakeCard);
   }
 }

@@ -6,6 +6,7 @@ import { Car } from 'src/app/models/car';
 import { Customer } from 'src/app/models/customer';
 import { Rental } from 'src/app/models/rental';
 import { CustomerService } from 'src/app/services/customer.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-rental',
@@ -30,24 +31,12 @@ export class RentalComponent implements OnInit {
     private customerService: CustomerService,
     private router: Router,
     private toastrService: ToastrService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private localStorageService: LocalStorageService
   ) {}
 
-  ngOnInit(): void {
-    this.getCustomer();
-  }
+  ngOnInit(): void {}
 
-  getCustomer() {
-    this.customerService.getCustomers().subscribe((response) => {
-      this.customers = response.data;
-      console.log(response.data);
-      this.dataLoaded = true;
-    });
-  }
-  // event.toISOString()
-  //> "2011-10-05T14:48:00.000Z"
-  // event.toISOString().slice(0,10)
-  //> "2011-10-05"
   getRentMinDate() {
     this.minDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     return this.minDate;
@@ -72,25 +61,28 @@ export class RentalComponent implements OnInit {
   }
 
   createRental() {
-    let MyRental: Rental = {
-      carId: this.car.carId,
-      brandName: this.car.brandName,
-      colorName: this.car.colorName,
-      carModelYear: this.car.carModelYear,
-      carDailyPrice: this.car.carDailyPrice,
-      carDescription: this.car.carDescription,
-      rentDate: this.rentDate,
-      returnDate: this.returnDate,
-      customerId: this.customerId,
-    };
-    if (MyRental.customerId == undefined || MyRental.rentDate == undefined) {
-      this.toastrService.error("Eksik bilgi girdiniz","Bilgilerinizi kontrol edin")
-    } else{
-      this.router.navigate(['/payment/', JSON.stringify(MyRental)]);
+    let MyRental: Rental;
+    if (localStorage.getItem('token') && this.rentDate != undefined) {
+      MyRental = {
+        carId: this.car.carId,
+        brandName: this.car.brandName,
+        colorName: this.car.colorName,
+        carModelYear: this.car.carModelYear,
+        carDailyPrice: this.car.carDailyPrice,
+        carDescription: this.car.carDescription,
+        rentDate: this.rentDate,
+        returnDate: this.returnDate,
+        customerId: this.localStorageService.getCurrentCustomer().customerId,
+      };
       this.toastrService.info(
-        'Ödeme sayfasına yönlendiriliyorsunuz...',
+        'Ödeme sayfasına yönlendiriliyorsunuz.',
         'Ödeme İşlemleri'
       );
+      this.router.navigate(['/payment/', JSON.stringify(MyRental)]);
+    } else if (!localStorage.getItem('token')) {
+      this.toastrService.info('Giriş Yapın', 'Araba Kiralayabilmek için');
+    } else {
+      this.toastrService.error('Dikkat', 'Tarih Seçtiğinizden Emin Olun');
     }
   }
 
@@ -101,6 +93,5 @@ export class RentalComponent implements OnInit {
 
   setCustomerId(customerId: string) {
     this.customerId = +customerId;
-    console.log(this.customerId);
   }
 }
