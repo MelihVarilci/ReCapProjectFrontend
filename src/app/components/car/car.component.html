@@ -1,4 +1,56 @@
-<h2 class="text-center">Araba Listesi</h2>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div *ngIf="dataLoaded == false" class="d-flex justify-content-center">
+        <div class="spinner-border text-success" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <div>
+        <app-car-filter></app-car-filter>
+        <div class="row">
+          <div *ngFor="let car of cars" class="col-md-4 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <b>{{ car.brandName }}</b>
+                </h5>
+                <img
+                  src="{{ apiUrl }}{{ car.carImages[0].imagePath }}"
+                  class="card-img-top"
+                  height="120px"
+                />
+                <ul ul class="list-group list-group-flush mt-3">
+                  <li class="list-group-item">Model: {{ car.carModelYear }}</li>
+                  <li class="list-group-item">
+                    Günlük Fiyat: {{ car.carDailyPrice }}
+                  </li>
+                  <li class="list-group-item">
+                    Araba Rengi: {{ car.colorName }}
+                  </li>
+                  <li class="list-group-item">Findeks Puanı: {{ car.findexPoint }}</li>
+                </ul>
+              </div>
+              <div class="card-footer">
+                <button
+                  class="btn btn-secondary"
+                  routerLink="cars/cardetail/{{ car.carId }}"
+                >
+                  İncele
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-danger btn-xs" routerLink="/cars/add">
+          Araç Ekle
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <h2 class="text-center">Araba Listesi</h2>
 <div *ngIf="dataLoaded == false" class="d-flex justify-content-center">
   <div class="spinner-border text-success" role="status">
     <span class="visually-hidden">Loading...</span>
@@ -51,4 +103,4 @@
     </tr>
   </tbody>
 </table>
-<button class="btn btn-success" routerLink="/cars/add">Araç Ekle</button>
+<button class="btn btn-success" routerLink="/cars/add">Araç Ekle</button> -->

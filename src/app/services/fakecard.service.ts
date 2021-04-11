@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { FakeCard } from '../models/fakeCard';
 import { ListResponseModel } from '../models/listResponseModel';
 import { ResponseModel } from '../models/responseModel';
@@ -11,7 +12,7 @@ import { ResponseModel } from '../models/responseModel';
 export class FakecardService {
   constructor(private httpClient: HttpClient) { }
 
-  apiUrl = 'https://localhost:44352/api/';
+  apiUrl = environment.baseUrl;
 
   isCardExist(fakeCard: FakeCard): Observable<ResponseModel> {
     let newPath = this.apiUrl + 'fakecards/iscardexist';

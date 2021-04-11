@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Color } from '../models/color';
 import { ListResponseModel } from '../models/listResponseModel';
 import { ResponseModel } from '../models/responseModel';
@@ -9,27 +10,27 @@ import { ResponseModel } from '../models/responseModel';
   providedIn: 'root'
 })
 export class ColorService {
-  apiUrl = "https://localhost:44352/api/";
+  apiUrl = environment.baseUrl;
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  getColors():Observable<ListResponseModel<Color>>{
+  getColors(): Observable<ListResponseModel<Color>> {
     let newUrl = this.apiUrl + "colors/getall";
     return this.httpClient.get<ListResponseModel<Color>>(newUrl);
   }
 
-  addColor(color:Color):Observable<ResponseModel>{
+  addColor(color: Color): Observable<ResponseModel> {
     let newPath = this.apiUrl + "colors/add";
-    return this.httpClient.post<ResponseModel>(newPath,color);
+    return this.httpClient.post<ResponseModel>(newPath, color);
   }
 
-  updateColor(color:Color):Observable<ResponseModel>{
+  updateColor(color: Color): Observable<ResponseModel> {
     let newPath = this.apiUrl + "colors/update";
-    return this.httpClient.post<ResponseModel>(newPath,color)
+    return this.httpClient.post<ResponseModel>(newPath, color)
   }
 
-  deleteColor(color:Color):Observable<ResponseModel>{
+  deleteColor(color: Color): Observable<ResponseModel> {
     let newPath = this.apiUrl + "colors/delete";
-    return this.httpClient.post<ResponseModel>(newPath,color)
+    return this.httpClient.post<ResponseModel>(newPath, color)
   }
 }

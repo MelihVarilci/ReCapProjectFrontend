@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { Rental } from '../models/rental';
 import { ResponseModel } from '../models/responseModel';
 
@@ -7,14 +8,14 @@ import { ResponseModel } from '../models/responseModel';
   providedIn: 'root'
 })
 export class PaymentService {
-  apiUrl = "https://localhost:44352/api/"; 
+  apiUrl = environment.baseUrl;
 
   constructor(
-    private httpClient:HttpClient
+    private httpClient: HttpClient
   ) { }
 
-  pay(rental:Rental,amount:number){
+  pay(rental: Rental, amount: number) {
     let path = this.apiUrl + "rentals/paymentadd";
-    this.httpClient.post<ResponseModel>(path,{payment:{amount:amount},rental:rental})
+    this.httpClient.post<ResponseModel>(path, { payment: { amount: amount }, rental: rental })
   }
 }

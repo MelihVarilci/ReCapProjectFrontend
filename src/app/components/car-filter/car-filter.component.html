@@ -1,48 +1,44 @@
-<!-- <select class="selectpicker" data-live-search="true">
-  <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
-  <option data-tokens="mustard">Burger, Shake and a Smile</option>
-  <option data-tokens="frosting">Sugar, Spice and all things nice</option>
-</select> -->
-<div class="row mb-2">
-  <div class="col col-4">
-    <select [(ngModel)]="brandIdFilter" class="form-select">
-      <option disabled selected>Araba Markası Seçin</option>
-      <option *ngFor="let brand of brands" 
-      [value]="brand.brandId"
-      [selected]="getSelectedBrand(brand.brandId)">      
-        {{ brand.brandName }} 
+<div class="row">
+  <div class="mb-2 col-4">
+    <select class="form-select rounded-0" [(ngModel)]="brandIdFilter">
+      <option value="">Marka Seçiniz</option>
+
+      <option *ngFor="let brand of brands" value="{{ brand.brandId }}">
+        {{ brand.brandName }}
       </option>
     </select>
   </div>
-  <div class="col col-4">
-    <select [(ngModel)] = "colorIdFilter" class="form-select">
-      <option disabled selected>Araba Rengini Seçin</option>
-      <option *ngFor="let color of colors"
-      [value]="color.colorId"
-      [selected] = "getSelectedColor(color.colorId)">
+
+  <div class="mb-2 col-4">
+    <select class="form-select rounded-0" [(ngModel)]="colorIdFilter">
+      <option value="">Renk Seçiniz</option>
+
+      <option *ngFor="let color of colors" value="{{ color.colorId }}">
         {{ color.colorName }}
       </option>
     </select>
   </div>
-  <div class="col col-2">
-    <div class="btn-group">
-      <button
-        routerLink="/cars/filter/{{ brandIdFilter }}/{{ colorIdFilter }}"
-        type="button"
-        class="btn btn-warning"
-      >
-        Filtrele
-      </button>
+  <div class="row col-4" *ngIf="brandIdFilter > 0 || colorIdFilter > 0">
+    <div class="col-lg mb-3 mb-lg-0">
+      <div class="d-grid">
+        <button
+          class="btn btn-outline-primary"
+          routerLink="/cars"
+          (click)="clearFilter()"
+        >
+          <i class="bi-backspace me-1"></i> Temizle
+        </button>
+      </div>
     </div>
-  </div>
-  <div class="col col-2">
-    <div class="btn-group">
-      <button routerLink="/cars"
-      type="button"
-      class="btn btn-danger"
-      >
-        Temizle
-      </button>
+    <div class="col-lg">
+      <div class="d-grid">
+        <button
+          class="btn btn-primary"
+          (click)="setFilteredRoute(brandIdFilter,colorIdFilter)"
+        >
+          <i class="bi-search me-1"></i> Filtrele
+        </button>
+      </div>
     </div>
   </div>
 </div>
