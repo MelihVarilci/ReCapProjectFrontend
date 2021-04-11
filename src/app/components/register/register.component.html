@@ -1,132 +1,4 @@
-<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<div class="container register">
-  <div class="row">
-    <div class="col-md-3 register-left">
-      <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
-      <h3>Hoş Geldin</h3>
-      <p>Hemen Kayıt Ol ve En Ucuz Fiyatlara Araba Kiralamaya Başla!</p>
-      <input routerLink="/auth/login" type="submit" value="Giriş Yap" /><br />
-    </div>
-    <div class="col-md-9 register-right">
-      
-      <div class="tab-content" id="myTabContent">
-        <div
-          class="tab-pane fade show active"
-          id="home"
-          role="tabpanel"
-          aria-labelledby="home-tab"
-        >
-          <h3 class="register-heading">Kayıt Ol</h3>
-          <div class="row register-form">
-            <div class="col-md-12">
-              <div class="form-group">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Adınız *"
-                  value=""
-                />
-              </div>
-              <div class="form-group">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Soyadınız *"
-                  value=""
-                />
-              </div>
-              <div class="form-group">
-                <input
-                  type="password"
-                  class="form-control"
-                  placeholder="Şifreniz *"
-                  value=""
-                />
-              </div>
-              <div class="form-group">
-                <input
-                  type="password"
-                  class="form-control"
-                  placeholder="Şifrenizi Onaylayın *"
-                  value=""
-                />
-              </div>
-              <div class="form-group">
-                <input
-                  type="email"
-                  class="form-control"
-                  placeholder="E-Postanız *"
-                  value=""
-                />
-              </div>
-              <input type="submit" class="btnRegister" value="Register" />
-            </div>
-          </div>
-        </div>
-        <div
-          class="tab-pane fade show"
-          id="profile"
-          role="tabpanel"
-          aria-labelledby="profile-tab"
-        >
-          <h3 class="register-heading">Apply as a Hirer</h3>
-          <div class="row register-form">
-            <div class="col-md-6">
-              <div class="form-group">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Adınız *"
-                  value=""
-                />
-              </div>
-              <div class="form-group">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Soyadınız *"
-                  value=""
-                />
-              </div>
-              <div class="form-group">
-                <input
-                  type="email"
-                  class="form-control"
-                  placeholder="E-Posta *"
-                  value=""
-                />
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <input
-                  type="password"
-                  class="form-control"
-                  placeholder="Şifreniz *"
-                  value=""
-                />
-              </div>
-              <div class="form-group">
-                <input
-                  type="password"
-                  class="form-control"
-                  placeholder="Şifrenizi Onaylayın *"
-                  value=""
-                />
-              </div>
-              <input type="submit" class="btnRegister" value="Register" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<div class="row text-center body">
+<!-- <div class="row text-center body">
   <div class="col-lg-4 mx-auto my-auto">
     <div class="display-6 mb-4">Üye Ol</div>
     <div class="card rounded-0 shadow">
@@ -212,4 +84,85 @@
       </div>
     </div>
   </div>
+</div> -->
+
+<div class="main">
+  <section class="signup">
+    <div class="container">
+      <div class="signup-content">
+        <div class="signup-form">
+          <h2 class="form-title">Kayıt Ol</h2>
+          <form [formGroup]="registerForm" (ngSubmit)="register()" class="register-form" id="register-form">
+            <div class="form-group">
+              <input
+                type="text"
+                id="firstName"
+                formControlName="firstName"
+                placeholder="Adınız *"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                id="lastName"
+                formControlName="lastName"
+                placeholder="Soyadınız *"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="email"
+                id="email"
+                formControlName="email"
+                placeholder="E-Posta *"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                id="password"
+                formControlName="password"
+                placeholder="Şifreniz *"
+              />
+            </div>          
+          <div class="form-group">
+            <input
+              type="password"
+              id="confirmPassword"
+              formControlName="confirmPassword"
+              placeholder="Şifrenizi Onaylayın *"
+            />
+          </div>
+            <div class="form-group">
+              <input
+                type="checkbox"
+                name="agree-term"
+                id="agree-term"
+                class="agree-term"
+              />
+              <label for="agree-term" class="label-agree-term"
+                ><span><span></span></span><a class="term-service">Hizmet Koşullarını</a>
+                okudum ve kabul ediyorum
+                </label
+              >
+            </div>
+            <div class="form-group form-button">
+              <input
+                type="submit"
+                id="signup"
+                class="form-submit"
+                value="Kayıt Ol"
+              />
+            </div>
+          </form>
+        </div>
+        <div class="signup-image">
+          <figure>
+            <img src="https://i.ibb.co/ns9dvKK/signup-image.jpg">
+          </figure>
+          <a routerLink="/auth/login" class="signup-image-link">Zaten bir hesabım var</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>

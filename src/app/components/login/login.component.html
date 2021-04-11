@@ -1,4 +1,4 @@
-<body class="text-center">
+<!-- <body class="text-center">
   <main class="form-signin">
     <form [formGroup]="loginForm">
       <h1 class="h3 mb-3 fw-normal">Giriş yap</h1>
@@ -33,4 +33,68 @@
       <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
     </form>
   </main>
-</body>
+</body> -->
+
+<div class="main">
+  <section class="sign-in">
+    <div class="container">
+      <div class="signin-content">
+        <div class="signin-image">
+          <figure>
+            <img
+              src="https://i.ibb.co/Tktbt3m/signin-image.jpg"
+              alt="signin-image"
+            />
+          </figure>
+          <a routerLink="/auth/register" class="signup-image-link"
+            >Hesap Oluştur</a
+          >
+        </div>
+        <div class="signin-form">
+          <h2 class="form-title">Giris Yap</h2>
+          <form [formGroup]="loginForm" class="register-form">
+            <div class="form-group">
+              <input
+                formControlName="email"
+                type="email"
+                class="form-control"
+                id="your_email"
+                placeholder="name@example.com"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                formControlName="password"
+                type="password"
+                class="form-control"
+                id="floatingPassword"
+                placeholder="Parola"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="checkbox"
+                name="remember-me"
+                id="remember-me"
+                class="agree-term"
+              />
+              <label for="remember-me" class="label-agree-term"
+                ><span><span></span></span>Beni hatırla</label
+              >
+            </div>
+            <div class="form-group form-button">
+              <input
+                type="submit"
+                name="signin"
+                id="signin"
+                class="form-submit"
+                value="Giris Yap"
+                (click)="login()"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
