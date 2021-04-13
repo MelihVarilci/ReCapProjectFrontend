@@ -1,96 +1,30 @@
-<!-- <body class="text-center">
-  <main class="form-signin">
-    <form [formGroup]="loginForm">
-      <h1 class="h3 mb-3 fw-normal">Giriş yap</h1>
-      <div class="form-floating">
-        <input
-          formControlName="email"
-          type="email"
-          class="form-control"
-          id="floatingInput"
-          placeholder="name@example.com"
-        />
-        <label for="floatingInput">E-posta</label>
-      </div>
-      <div class="form-floating">
-        <input
-          formControlName="password"
-          type="password"
-          class="form-control"
-          id="floatingPassword"
-          placeholder="Password"
-        />
-        <label for="floatingPassword">Parola</label>
-      </div>
-      <button class="w-100 btn btn-lg btn-primary" (click)="login()">
-        Giriş Yap
-      </button>
-      <div class="checkbox mt-3">
-        <button routerLink="/auth/register" class="btn btn-info rounded-0">
-          <i class="bi-plus-square me-1"></i> Üye Ol
-        </button>
-      </div>
-      <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-    </form>
-  </main>
-</body> -->
-
 <div class="main">
   <section class="sign-in">
     <div class="container">
       <div class="signin-content">
         <div class="signin-image">
           <figure>
-            <img
-              src="https://i.ibb.co/Tktbt3m/signin-image.jpg"
-              alt="signin-image"
-            />
+            <img src="https://i.ibb.co/Tktbt3m/signin-image.jpg" alt="signin-image" />
           </figure>
-          <a routerLink="/auth/register" class="signup-image-link"
-            >Hesap Oluştur</a
-          >
+          <a routerLink="/auth/register" class="signup-image-link">Hesap Oluştur</a>
         </div>
         <div class="signin-form">
           <h2 class="form-title">Giris Yap</h2>
           <form [formGroup]="loginForm" class="register-form">
             <div class="form-group">
-              <input
-                formControlName="email"
-                type="email"
-                class="form-control"
-                id="your_email"
-                placeholder="name@example.com"
-              />
+              <input formControlName="email" type="email" class="form-control" id="your_email"
+                placeholder="name@example.com" />
             </div>
             <div class="form-group">
-              <input
-                formControlName="password"
-                type="password"
-                class="form-control"
-                id="floatingPassword"
-                placeholder="Parola"
-              />
+              <input formControlName="password" type="password" class="form-control" id="floatingPassword"
+                placeholder="Parola" />
             </div>
             <div class="form-group">
-              <input
-                type="checkbox"
-                name="remember-me"
-                id="remember-me"
-                class="agree-term"
-              />
-              <label for="remember-me" class="label-agree-term"
-                ><span><span></span></span>Beni hatırla</label
-              >
+              <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+              <label for="remember-me" class="label-agree-term"><span><span></span></span>Beni hatırla</label>
             </div>
             <div class="form-group form-button">
-              <input
-                type="submit"
-                name="signin"
-                id="signin"
-                class="form-submit"
-                value="Giris Yap"
-                (click)="login()"
-              />
+              <input type="submit" name="signin" id="signin" class="form-submit" value="Giris Yap" (click)="login()" />
             </div>
           </form>
         </div>

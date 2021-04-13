@@ -33,4 +33,9 @@ export class BrandService {
     let newPath = this.apiUrl + "brands/delete";
     return this.httpClient.post<ResponseModel>(newPath, brand)
   }
+
+  deleteByBramdId(brandId: number): Observable<ResponseModel> {
+    let newPath = this.apiUrl + "brands/deletebyid?brandId=" + brandId;
+    return this.httpClient.post<ResponseModel>(newPath, null)
+  }
 }

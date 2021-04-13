@@ -11,7 +11,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css','../login/login.component.css'],
+  styleUrls: ['./register.component.css', '../login/login.component.css'],
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private localStorageService: LocalStorageService,
     private customerService: CustomerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.createRegisterForm();

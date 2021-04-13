@@ -1,5 +1,5 @@
-.body {
-    height: 70vh;
+/* .body {
+    height: 100%;
  }
  
  .form-control{
@@ -9,4 +9,15 @@
  .form-control:focus{
     box-shadow: none;
     border-color: #0D6EFD;
- }
+ } */
+
+img {
+  border-radius: 50% !important;
+  border-color: blue;
+}
+.user-heading a {
+  border-radius: 50% !important;
+  -webkit-border-radius: 50% !important;
+  border: 10px solid rgba(255, 255, 255, 0.3);
+  display: inline-block;
+}

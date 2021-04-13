@@ -1,42 +1,20 @@
-<nav
-  class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm"
->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom shadow-sm">
   <div class="container">
-    <a class="navbar-brand" routerLink="cars"
-      ><i class="bi-bullseye me-1"></i> RentACar</a
-    >
-    <button
-      class="navbar-toggler"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarContent"
-    >
+    <a href="" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+      <i class="fas fa-2x fa-car-side"></i>&nbsp;
+      RentACar
+    </a>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarContent">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarContent">
-      <div class="navbar-nav mb-2 mb-lg-0">
-        <a class="nav-item nav-link" routerLink="cars" routerLinkActive="active"
-          >Arabalar</a
-        >
-        <a
-          class="nav-item nav-link"
-          routerLink="auth/rentals"
-          routerLinkActive="active"
-          >Kiralamalar</a
-        >
-        <a
-          class="nav-item nav-link"
-          routerLink="brand/add"
-          routerLinkActive="active"
-          >Markalar</a
-        >
-        <a
-          class="nav-item nav-link"
-          routerLink="color/add"
-          routerLinkActive="active"
-          >Renkler</a
-        >
-      </div>
       <div class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <a class="nav-item nav-link" routerLink="cars" routerLinkActive="active">
+          <i class="bi d-block mx-auto mb-1 bi-speedometer2 text-white d-flex justify-content-center"
+            style="width: 30px; height: 30px; font-size: 30px"></i>
+          Arabalar
+        </a>
+
         <app-auth-menu></app-auth-menu>
       </div>
     </div>

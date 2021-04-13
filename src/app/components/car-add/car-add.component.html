@@ -7,69 +7,34 @@
       <form [formGroup]="carAddForm">
         <div class="mb-3">
           <label>Araba adı</label>
-          <input
-            type="text"
-            placeholder="Araba adı"
-            formControlName="brandName"
-            class="form-control"
-          />
+          <input type="text" placeholder="Araba adı" formControlName="brandName" class="form-control" />
         </div>
-        <small
-          *ngIf="carAddForm.get('brandName')?.hasError('required')"
-          class="form-text text-muted"
-        >
+        <small *ngIf="carAddForm.get('brandName')?.hasError('required')" class="form-text text-muted">
           Araba adı zorunludur
         </small>
-        <small
-          *ngIf="carAddForm.get('brandName')?.hasError('minlength')"
-          class="form-text text-muted"
-        >
+        <small *ngIf="carAddForm.get('brandName')?.hasError('minlength')" class="form-text text-muted">
           Minimum 2 karakter olmalıdır
         </small>
         <div class="mb-3">
           <label>Renk</label>
-          <input
-            type="text"
-            placeholder="Rengi"
-            formControlName="colorName"
-            class="form-control"
-          />
+          <input type="text" placeholder="Rengi" formControlName="colorName" class="form-control" />
         </div>
         <div class="mb-3">
           <label>Modeli</label>
-          <input
-            type="number"
-            placeholder="Modeli"
-            formControlName="carModelYear"
-            class="form-control"
-          />
+          <input type="number" placeholder="Modeli" formControlName="carModelYear" class="form-control" />
         </div>
         <div class="mb-3">
           <label>Günlük Kirası</label>
-          <input
-            type="number"
-            placeholder="Kirası"
-            formControlName="carDailyPrice"
-            class="form-control"
-          />
+          <input type="number" placeholder="Kirası" formControlName="carDailyPrice" class="form-control" />
         </div>
         <div class="mb-3">
           <label>Açıklama</label>
-          <input
-            type="text"
-            placeholder="Açıklaması"
-            formControlName="carDescription"
-            class="form-control"
-          />
+          <input type="text" placeholder="Açıklaması" formControlName="carDescription" class="form-control" />
         </div>
       </form>
     </div>
     <div class="card-footer">
-      <button
-        [disabled]="!carAddForm.valid"
-        class="btn btn-success"
-        (click)="add()"
-      >
+      <button [disabled]="!carAddForm.valid" class="btn btn-success" (click)="add()">
         Ekle
       </button>
     </div>

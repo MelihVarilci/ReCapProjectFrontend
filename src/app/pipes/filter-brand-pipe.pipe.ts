@@ -7,10 +7,10 @@ import { Brand } from '../models/brand';
 export class FilterBrandPipePipe implements PipeTransform {
 
   transform(value: Brand[], filterBrandText: string): Brand[] {
-    filterBrandText = filterBrandText ? filterBrandText.toLocaleLowerCase():"";
+    filterBrandText = filterBrandText ? filterBrandText.toLocaleLowerCase() : "";
     return filterBrandText ? value
-    .filter((b:Brand) => b.brandName.toLocaleLowerCase().indexOf(filterBrandText) !== -1)
-    :value;
+      .filter((b: Brand) => b.brandName.toLocaleLowerCase().indexOf(filterBrandText) !== -1)
+      : value;
   }
 
 }

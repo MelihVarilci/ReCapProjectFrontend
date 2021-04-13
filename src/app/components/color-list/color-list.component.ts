@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { Color } from 'src/app/models/color';
 import { ColorService } from 'src/app/services/color.service';
@@ -12,11 +15,19 @@ import { ColorService } from 'src/app/services/color.service';
 export class ColorListComponent implements OnInit {
   colors: Color[] = [];
   dataLoaded = false;
-
+  color: Color;
   colorAddForm: FormGroup;
   colorUpdateForm: FormGroup;
   colorDeleteForm: FormGroup;
   selectedColor: Color;
+
+  displayedColumns: string[] = ['colorId', 'colorName', 'actions'];
+
+  listData: MatTableDataSource<any>;
+  searchKey: string;
+
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private colorService: ColorService,
@@ -33,7 +44,20 @@ export class ColorListComponent implements OnInit {
     this.colorService.getColors().subscribe((response) => {
       this.colors = response.data;
       this.dataLoaded = response.success;
+
+      this.listData = new MatTableDataSource(this.colors);
+      this.listData.sort = this.sort;
+      this.listData.paginator = this.paginator;
     });
+  }
+
+  onSearchClear() {
+    this.searchKey = "";
+    this.applyFilter();
+  }
+
+  applyFilter() {
+    this.listData.filter = this.searchKey.trim().toLowerCase();
   }
 
   addCreateForm() {
@@ -42,27 +66,17 @@ export class ColorListComponent implements OnInit {
     });
   }
 
-  setSelectedColorToUpdate(color: Color) {
-    this.selectedColor = color;
-    this.updateCreateForm();
-  }
-
   updateCreateForm() {
     this.colorUpdateForm = this.formBuilder.group({
-      colorId: [this.selectedColor.colorId, Validators.required],
-      colorName: ['', Validators.required],
+      colorId: [this.color.colorId, [Validators.required]],
+      colorName: [this.color.colorName, [Validators.required]],
     });
-  }
-
-  setSelectedColorToDelete(color: Color) {
-    this.selectedColor = color;
-    this.deleteCreateForm();
   }
 
   deleteCreateForm() {
     this.colorDeleteForm = this.formBuilder.group({
-      colorId: [this.selectedColor.colorId, [Validators.required]],
-      colorName: [this.selectedColor.colorName, [Validators.required]],
+      colorId: [this.color.colorId, [Validators.required]],
+      colorName: [this.color.colorName, [Validators.required]],
     });
   }
 
@@ -98,7 +112,12 @@ export class ColorListComponent implements OnInit {
     }
   }
 
-  updateColor() {
+  updateColor(color: Color) {
+    this.color = color;
+    this.updateCreateForm();
+  }
+
+  btnUpdateColor() {
     if (this.colorUpdateForm.valid) {
       let colorModel = Object.assign({}, this.colorUpdateForm.value);
       this.colorService.updateColor(colorModel).subscribe(
@@ -106,7 +125,7 @@ export class ColorListComponent implements OnInit {
           this.toastrService.success(response.message, 'Başarılı');
           setTimeout(() => {
             window.location.reload();
-          }, 2000);
+          }, 1500);
         },
         (responseError) => {
           if (responseError.error.ValidationErrors.length > 0) {
@@ -131,7 +150,12 @@ export class ColorListComponent implements OnInit {
     }
   }
 
-  deleteColor() {
+  deleteColor(color: Color) {
+    this.color = color;
+    this.deleteCreateForm();
+  }
+
+  btnDeleteColor() {
     if (this.colorDeleteForm.valid) {
       let colorModel = Object.assign({}, this.colorDeleteForm.value);
       this.colorService.deleteColor(colorModel).subscribe(

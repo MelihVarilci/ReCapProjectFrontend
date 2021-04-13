@@ -26,7 +26,7 @@
           <td>
             <strong class="text-danger">{{
               amountOfPayment | currency: "₺"
-            }}</strong>
+              }}</strong>
           </td>
         </tr>
       </tbody>
@@ -42,58 +42,32 @@
       <div *ngIf="cardAddForm" class="card-body">
         <form [formGroup]="cardAddForm" (ngSubmit)="add()">
           <div class="form-floating mb-3">
-            <input
-              type="text"
-              id="nameOnTheCard"
-              class="form-control"
-              placeholder="nameOnTheCard"
-              formControlName="nameOnTheCard"
-            />
+            <input type="text" id="nameOnTheCard" class="form-control" placeholder="nameOnTheCard"
+              formControlName="nameOnTheCard" />
             <label for="nameOnTheCard">Kart Üzerindeki Ad ve Soyad</label>
           </div>
           <div class="form-floating mb-3">
-            <input
-              type="text"
-              id="cardNumber"
-              class="form-control"
-              placeholder="cardNumber"
-              formControlName="cardNumber"
-            />
+            <input type="text" id="cardNumber" class="form-control" placeholder="cardNumber"
+              formControlName="cardNumber" />
             <label for="cardNumber">Kart Numarası</label>
           </div>
           <div class="row">
             <div class="col-lg-6">
               <div class="form-floating mb-3">
-                <input
-                  type="text"
-                  id="expirationDate"
-                  class="form-control"
-                  placeholder="expirationDate"
-                  formControlName="expirationDate"
-                />
+                <input type="text" id="expirationDate" class="form-control" placeholder="expirationDate"
+                  formControlName="expirationDate" />
                 <label for="expirationDate">Son Kullanım Tarihi</label>
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-floating mb-3">
-                <input
-                  type="text"
-                  id="cardCvv"
-                  class="form-control"
-                  placeholder="cardCvv"
-                  formControlName="cardCvv"
-                />
+                <input type="text" id="cardCvv" class="form-control" placeholder="cardCvv" formControlName="cardCvv" />
                 <label for="cardCvv">CVV</label>
               </div>
             </div>
           </div>
           <div class="form-check mb-3">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="save"
-              formControlName="save"
-            />
+            <input class="form-check-input" type="checkbox" id="save" formControlName="save" />
             <label class="form-check-label" for="save">
               Kart bilgilerimin kayıt edilmesini istiyorum.
             </label>

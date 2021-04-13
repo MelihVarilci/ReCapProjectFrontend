@@ -9,7 +9,7 @@ import { RentalService } from 'src/app/services/rental.service';
 })
 export class RentalManagementComponent implements OnInit {
   rentDetails: Rental[] = [];
-  constructor(private rentalService: RentalService) {}
+  constructor(private rentalService: RentalService) { }
 
   ngOnInit(): void {
     this.getRentals();

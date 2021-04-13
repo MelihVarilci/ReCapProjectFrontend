@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private localStorageService: LocalStorageService,
     private customerService: CustomerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.createLoginForm();
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
 
   createLoginForm() {
     this.loginForm = this.formBuilder.group({
-      email: [this.currentCustomerEmail,[Validators.required, Validators.email]],
+      email: [this.currentCustomerEmail, [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
   }
@@ -60,10 +60,11 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(loginModel).subscribe(
       (responseSuccess) => {
-        this.toastrService.info(responseSuccess.message,'Giriş Başarılı');
+        this.toastrService.info(responseSuccess.message, 'Giriş Başarılı');
         this.localStorageService.setToken(responseSuccess.data);
         this.getCustomerByEmail(loginModel.email);
-        return this.router.navigate(['/cars']);
+
+        return window.location.replace('/cars');
       },
       (responseError) => {
         return this.toastrService.error(responseError.error, 'Hata');

@@ -7,43 +7,18 @@
   <div class="card-header text-center">
     <strong> {{ cars?.brandName }} - {{ cars.carModelYear }} </strong>
   </div>
-  <div
-    id="carImageSlide"
-    class="carousel slide carousel-fade"
-    data-bs-ride="carousel"
-  >
-    <div
-      class="carousel-inner d-flex"
-      style="height: 70vh; width: 80vh; margin: auto"
-    >
-      <div
-        *ngFor="let carImage of carImages; index as i; first as firstImage"
-        class="carousel-item align-self-center"
-        [ngClass]="{ active: firstImage }"
-        style="height: 100%; width: 100%"
-      >
-        <img
-          src="{{ apiUrl }}{{ carImage.imagePath }}"
-          class=""
-          style="height: 100%; width: 100%"
-        />
+  <div id="carImageSlide" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-inner d-flex" style="height: 70vh; width: 80vh; margin: auto">
+      <div *ngFor="let carImage of carImages; index as i; first as firstImage" class="carousel-item align-self-center"
+        [ngClass]="{ active: firstImage }" style="height: 100%; width: 100%">
+        <img src="{{ apiUrl }}{{ carImage.imagePath }}" class="" style="height: 100%; width: 100%" />
       </div>
 
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#carImageSlide"
-        data-bs-slide="prev"
-      >
+      <button class="carousel-control-prev" type="button" data-bs-target="#carImageSlide" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#carImageSlide"
-        data-bs-slide="next"
-      >
+      <button class="carousel-control-next" type="button" data-bs-target="#carImageSlide" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
@@ -67,7 +42,7 @@
           <th scope="row">Fiyat</th>
           <td>
             {{
-              cars.carDailyPrice | currency: "TRY":"symbol-narrow":"1.2-2"
+            cars.carDailyPrice | currency: "TRY":"symbol-narrow":"1.2-2"
             }}/Gunluk
           </td>
         </tr>

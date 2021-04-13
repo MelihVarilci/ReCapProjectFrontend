@@ -1,36 +1,51 @@
-<div *ngIf="!isAuth()">
-    <button class="btn btn-outline-primary rounded-pill px-4" routerLink="/auth/register">
-       <i class="bi-person-fill me-1"></i> Üye Ol
-    </button>
- 
-    <button class="btn btn-primary rounded-pill px-4 ms-lg-2" routerLink="/auth/login">
-       <i class="bi-box-arrow-in-right me-1"></i> Giriş Yap
-    </button>
- </div>
- 
- <div *ngIf="isAuth() && getCurrentCustomer()">
-    <div class="btn-group d-grid">
-       <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
-          <i class="bi-person-circle me-1"></i>
-          {{ getCurrentCustomer().firstName }} {{ getCurrentCustomer().lastName }}
-       </button>
- 
-       <div class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
-          <div class="dropdown-item cursor-none">
-             <i class="bi-check2 me-1"></i>
-             {{ getCurrentCustomer().findexPoint }}
-             Findex Puanı
-          </div>
- 
-          <hr class="dropdown-divider">
- 
-          <div class="dropdown-item" routerLink="/auth/profile">
-             <i class="bi-pencil me-1"></i> Profili Düzenle
-          </div>
- 
-          <div class="dropdown-item" (click)="logout()">
-             <i class="bi-box-arrow-right me-1"></i> Çıkış Yap
-          </div>
-       </div>
+<div *ngIf="!isAuth()" class="nav-link">
+  <button class="btn btn-outline-primary rounded-pill px-4" routerLink="/auth/register">
+    <i class="bi-person-fill me-1"></i> Üye Ol
+  </button>
+
+  <button class="btn btn-primary rounded-pill px-4 ms-lg-2" routerLink="/auth/login">
+    <i class="bi-box-arrow-in-right me-1"></i> Giriş Yap
+  </button>
+</div>
+
+<div *ngIf="isAuth() && getCurrentCustomer()" class="navbar-nav ms-auto mb-2 mb-lg-0">
+  <a class="nav-item nav-link" routerLink="auth/rentals" routerLinkActive="active">
+    <i class="bi bi-table mx-auto mb-1 bi-speedometer2 text-white d-flex justify-content-center"
+      style="width: 30px; height: 30px; font-size: 30px"></i>
+    Kiralamalar
+  </a>
+  <a class="nav-item nav-link" routerLink="color/list" routerLinkActive="active">
+    <i class="bi bi-paint-bucket mx-auto mb-1 text-white d-flex justify-content-center"
+      style="width: 30px; height: 30px; font-size: 30px"></i>
+    Renkler
+  </a>
+  <a class="nav-item nav-link" routerLink="brand/list" routerLinkActive="active">
+    <i class="bi bi-wrench mx-auto mb-1 text-white d-flex justify-content-center"
+      style="width: 30px; height: 30px; font-size: 30px"></i>
+    Markalar
+  </a>
+  <div class="btn-group d-grid nav-item nav-link">
+    <div data-bs-toggle="dropdown">
+      <i class="bi bi-person-circle mx-auto mb-1 text-white d-flex justify-content-center"
+        style="width: 30px; height: 30px; font-size: 30px"></i>
+      <i class="text-white">{{ getCurrentCustomer().firstName }}
+        {{ getCurrentCustomer().lastName }}
+      </i>
     </div>
- </div>
+    <div class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+      <div class="dropdown-item cursor-none">
+        <i class="bi-check2 me-1"></i>
+        {{ getCurrentCustomer().findexPoint }}
+        Findex Puanı
+      </div>
+      <hr class="dropdown-divider" />
+
+      <div class="dropdown-item" routerLink="/auth/profile">
+        <i class="bi-pencil me-1"></i> Profili Düzenle
+      </div>
+      <div class="dropdown-item" (click)="logout()">
+        <i class="bi-box-arrow-right me-1"></i> Çıkış Yap
+      </div>
+    </div>
+  </div>
+</div>

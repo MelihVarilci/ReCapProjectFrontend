@@ -1,41 +1,52 @@
-.btn-group button {
-    border-radius: 0;
-    padding-right: 18px;
-    padding-left: 18px;
- }
- 
- .btn-group button:focus {
-    box-shadow: none;
- }
- 
- .btn-group .dropdown-menu {
-    background-color: #6C757D;
-    border-radius: 0;
- }
- 
- .btn-group .dropdown-menu .dropdown-divider {
-    color: #EEEEEE;
- }
- 
- .btn-group .dropdown-menu .dropdown-item {
-    cursor: pointer;
-    color: #EEEEEE;
- }
- 
- .btn-group .dropdown-menu .dropdown-item:hover {
-    color: #6C757D;
- }
- 
- .btn-group .dropdown-menu .dropdown-item:focus, .dropdown-item:active {
-    background: #DDDDDD;
-    outline: 0;
- }
- 
- .cursor-none {
-    cursor: default !important;
- }
- 
- .cursor-none:hover {
-    color: #EEEEEE !important;
-    background-color: #6C757D;
- }
+.b-example-divider {
+  height: 3rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: solid rgba(0, 0, 0, 0.15);
+  border-width: 1px 0;
+  box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
+    inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
+}
+
+.form-control-dark {
+  color: #fff;
+  background-color: var(--bs-dark);
+  border-color: var(--bs-gray);
+}
+.form-control-dark:focus {
+  color: #fff;
+  background-color: var(--bs-dark);
+  border-color: #fff;
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+}
+
+.bi {
+  vertical-align: -0.125em;
+  fill: currentColor;
+}
+
+.text-small {
+  font-size: 85%;
+}
+
+.dropdown-toggle {
+  outline: 0;
+}
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+svg,
+i {
+  cursor: pointer;
+}

@@ -28,7 +28,7 @@ export class CarUpdateComponent implements OnInit {
     private carService: CarService,
     private toastrService: ToastrService,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.createCarUpdateForm();

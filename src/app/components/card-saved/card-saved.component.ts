@@ -15,32 +15,32 @@ export class CardSavedComponent implements OnInit {
   @Output() selectedCard: EventEmitter<FakeCard> = new EventEmitter<FakeCard>();
 
   constructor(
-    private fakeCardService:FakecardService,
-    private localStorageService:LocalStorageService
+    private fakeCardService: FakecardService,
+    private localStorageService: LocalStorageService
   ) { }
 
   ngOnInit(): void {
     this.currentCustomer = Object.assign({}, this.localStorageService.getCurrentCustomer());
     this.getCardsByCustomerId(this.currentCustomer.customerId);
   }
-  
+
   getCardsByCustomerId(customerId: number) {
-      this.fakeCardService.getByCustomerId(customerId).subscribe(response => {
-         this.cards = response.data;
-      });
-   }
+    this.fakeCardService.getByCustomerId(customerId).subscribe(response => {
+      this.cards = response.data;
+    });
+  }
 
-   selectCard(cardId: number) {
-      let selectedCard = this.cards.find(card => card.id == cardId);
+  selectCard(cardId: number) {
+    let selectedCard = this.cards.find(card => card.id == cardId);
 
-      let newSelectedCard: FakeCard = {
-        customerId: selectedCard.customerId,
-         nameOnTheCard: selectedCard.nameOnTheCard,
-         cardNumber: selectedCard.cardNumber,
-         expirationDate: selectedCard.expirationDate,
-         cardCvv: selectedCard.cardCvv,
-      };
-      
-      this.selectedCard.emit(newSelectedCard);
-   }
+    let newSelectedCard: FakeCard = {
+      customerId: selectedCard.customerId,
+      nameOnTheCard: selectedCard.nameOnTheCard,
+      cardNumber: selectedCard.cardNumber,
+      expirationDate: selectedCard.expirationDate,
+      cardCvv: selectedCard.cardCvv,
+    };
+
+    this.selectedCard.emit(newSelectedCard);
+  }
 }

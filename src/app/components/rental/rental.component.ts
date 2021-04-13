@@ -33,9 +33,9 @@ export class RentalComponent implements OnInit {
     private toastrService: ToastrService,
     private datePipe: DatePipe,
     private localStorageService: LocalStorageService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   getRentMinDate() {
     this.minDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');

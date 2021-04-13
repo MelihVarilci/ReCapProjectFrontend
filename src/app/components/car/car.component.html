@@ -1,30 +1,21 @@
 <div class="container mt-4">
-  <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-9">
       <div *ngIf="dataLoaded == false" class="d-flex justify-content-center">
-        <div class="spinner-border text-success" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
+        <mat-spinner></mat-spinner>
       </div>
       <div>
         <app-car-filter></app-car-filter>
         <div class="row">
           <div *ngFor="let car of cars" class="col-md-4 mb-4">
-            <div class="card">
+            <div class="card h-100">
+              <img src="{{ apiUrl }}{{ car.carImages[0].imagePath }}" class="card-img-top" width="%100" />
               <div class="card-body">
-                <h5 class="card-title">
-                  <b>{{ car.brandName }}</b>
-                </h5>
-                <img
-                  src="{{ apiUrl }}{{ car.carImages[0].imagePath }}"
-                  class="card-img-top"
-                  height="120px"
-                />
                 <ul ul class="list-group list-group-flush mt-3">
                   <li class="list-group-item">Model: {{ car.carModelYear }}</li>
+                  <li class="list-group-item">Marka: {{ car.brandName }}</li>
                   <li class="list-group-item">
-                    Günlük Fiyat: {{ car.carDailyPrice }}
+                    Günlük Fiyat: {{ car.carDailyPrice }} ₺
                   </li>
                   <li class="list-group-item">
                     Araba Rengi: {{ car.colorName }}
@@ -33,10 +24,7 @@
                 </ul>
               </div>
               <div class="card-footer">
-                <button
-                  class="btn btn-secondary"
-                  routerLink="cars/cardetail/{{ car.carId }}"
-                >
+                <button class="btn btn-secondary" routerLink="cardetail/{{ car.carId }}">
                   İncele
                 </button>
               </div>

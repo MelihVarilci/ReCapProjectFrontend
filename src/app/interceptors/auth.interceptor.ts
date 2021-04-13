@@ -12,22 +12,22 @@ import { LocalStorageService } from '../services/local-storage.service';
 export class AuthInterceptor implements HttpInterceptor {
 
   constructor(
-    private localStorageService:LocalStorageService
-  ) {}
+    private localStorageService: LocalStorageService
+  ) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     let tokenModel = this.localStorageService.getToken();
-    
+
     if (!tokenModel) {
       return next.handle(request);
     }
-    
-    let newRequest : HttpRequest<any>;
+
+    let newRequest: HttpRequest<any>;
 
     newRequest = request.clone({
-      headers: request.headers.set("Authorization","Bearer "+ tokenModel.token)
+      headers: request.headers.set("Authorization", "Bearer " + tokenModel.token)
     })
-    
+
     return next.handle(newRequest);
   }
 }

@@ -20,7 +20,7 @@ export class CarAddComponent implements OnInit {
     private formBuilder: FormBuilder,
     private carService: CarService,
     private toastrService: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.createCarAddForm();
@@ -28,11 +28,11 @@ export class CarAddComponent implements OnInit {
 
   createCarAddForm() {
     this.carAddForm = this.formBuilder.group({
-      brandName: ['', [Validators.required,Validators.minLength(2)]],
-      colorName: ['', [Validators.required,Validators.minLength(2)]],
+      brandName: ['', [Validators.required, Validators.minLength(2)]],
+      colorName: ['', [Validators.required, Validators.minLength(2)]],
       carModelYear: [0, [Validators.required, Validators.min(1950)]],
-      carDailyPrice: [0,[Validators.required, Validators.min(0)]],
-      carDescription: ['',[Validators.required]],
+      carDailyPrice: [0, [Validators.required, Validators.min(0)]],
+      carDescription: ['', [Validators.required]],
     });
   }
 
@@ -63,7 +63,7 @@ export class CarAddComponent implements OnInit {
         }
       );
     } else {
-      this.toastrService.error('Formunuz Eksik','Dikkat!')
+      this.toastrService.error('Formunuz Eksik', 'Dikkat!')
     }
   }
 }

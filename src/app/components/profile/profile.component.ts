@@ -15,7 +15,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 export class ProfileComponent implements OnInit {
   customerToUpdate: Customer;
   customerUpdateForm: FormGroup;
-  
+
   constructor(
     private localStorageService: LocalStorageService,
     private formBuilder: FormBuilder,

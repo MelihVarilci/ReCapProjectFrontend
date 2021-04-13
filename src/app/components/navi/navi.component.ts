@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-navi',
   templateUrl: './navi.component.html',
-  styleUrls: ['./navi.component.css']
+  styleUrls: ['./navi.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NaviComponent implements OnInit {
+export class NaviComponent {
+  @Input()
+  isDarkMode = false;
 
-  constructor() { }
+  @Output()
+  readonly darkModeSwitched = new EventEmitter<boolean>();
 
-  ngOnInit(): void {
+  onDarkModeSwitched({ checked }: MatSlideToggleChange) {
+    this.darkModeSwitched.emit(checked);
   }
 
 }

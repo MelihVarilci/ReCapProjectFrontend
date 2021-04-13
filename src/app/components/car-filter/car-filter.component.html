@@ -18,24 +18,17 @@
       </option>
     </select>
   </div>
-  <div class="row col-4" *ngIf="brandIdFilter > 0 || colorIdFilter > 0">
+  <div class="row col-4">
     <div class="col-lg mb-3 mb-lg-0">
       <div class="d-grid">
-        <button
-          class="btn btn-outline-primary"
-          routerLink="/cars"
-          (click)="clearFilter()"
-        >
+        <button class="btn btn-outline-primary" routerLink="/cars" (click)="clearFilter()">
           <i class="bi-backspace me-1"></i> Temizle
         </button>
       </div>
     </div>
     <div class="col-lg">
       <div class="d-grid">
-        <button
-          class="btn btn-primary"
-          (click)="setFilteredRoute(brandIdFilter,colorIdFilter)"
-        >
+        <button class="btn btn-primary" (click)="setFilteredRoute(brandIdFilter,colorIdFilter)">
           <i class="bi-search me-1"></i> Filtrele
         </button>
       </div>

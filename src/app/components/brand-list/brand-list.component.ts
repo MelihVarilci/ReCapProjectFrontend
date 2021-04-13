@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brand.service';
@@ -12,17 +15,25 @@ import { BrandService } from 'src/app/services/brand.service';
 export class BrandListComponent implements OnInit {
   brands: Brand[] = [];
   dataLoaded = false;
-
+  brand: Brand;
   brandAddForm: FormGroup;
   brandUpdateForm: FormGroup;
   brandDeleteForm: FormGroup;
   selectedBrand: Brand;
 
+  displayedColumns: string[] = ['brandId', 'brandName', 'actions'];
+
+  listData: MatTableDataSource<any>;
+  searchKey: string;
+
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(
     private brandService: BrandService,
     private toastrService: ToastrService,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getBrands();
@@ -33,36 +44,39 @@ export class BrandListComponent implements OnInit {
     this.brandService.getBrands().subscribe((response) => {
       this.brands = response.data;
       this.dataLoaded = response.success;
+
+      this.listData = new MatTableDataSource(this.brands);
+      this.listData.sort = this.sort;
+      this.listData.paginator = this.paginator;
     });
+  }
+
+  onSearchClear() {
+    this.searchKey = "";
+    this.applyFilter();
+  }
+
+  applyFilter() {
+    this.listData.filter = this.searchKey.trim().toLowerCase();
   }
 
   addCreateForm() {
     this.brandAddForm = this.formBuilder.group({
-      brandName: ['', Validators.required],
+      brandName: ['', [Validators.required]],
     });
-  }
-
-  setSelectedBrandToUpdate(brand: Brand) {
-    this.selectedBrand = brand;
-    this.updateCreateForm();
   }
 
   updateCreateForm() {
     this.brandUpdateForm = this.formBuilder.group({
-      brandId: [this.selectedBrand.brandId, Validators.required],
-      brandName: ['', Validators.required],
+      brandId: [this.brand.brandId, [Validators.required]],
+      brandName: [this.brand.brandName, [Validators.required]],
     });
   }
 
-  setSelectedBrandToDelete(brand: Brand) {
-    this.selectedBrand = brand;
-    this.deleteCreateForm();
-  }
-
   deleteCreateForm() {
-    this.brandDeleteForm = this.formBuilder.group({
-      brandId: [this.selectedBrand.brandId, [Validators.required]],
-      brandName: [this.selectedBrand.brandName, [Validators.required]],
+    this.brandUpdateForm = this.formBuilder.group({
+      brandId: [this.brand.brandId, [Validators.required]],
+      brandName: [this.brand.brandName, [Validators.required]],
     });
   }
 
@@ -98,7 +112,12 @@ export class BrandListComponent implements OnInit {
     }
   }
 
-  updateBrand() {
+  updateBrand(brand: Brand) {
+    this.brand = brand;
+    this.updateCreateForm();
+  }
+
+  btnUpdateBrand() {
     if (this.brandUpdateForm.valid) {
       let brandModel = Object.assign({}, this.brandUpdateForm.value);
       this.brandService.updateBrand(brandModel).subscribe(
@@ -131,7 +150,12 @@ export class BrandListComponent implements OnInit {
     }
   }
 
-  deleteBrand() {
+  deleteBrand(brand: Brand) {
+    this.brand = brand;
+    this.deleteCreateForm();
+  }
+
+  btnDeleteBrand() {
     if (this.brandDeleteForm.valid) {
       let brandModel = Object.assign({}, this.brandDeleteForm.value);
       this.brandService.deleteBrand(brandModel).subscribe(

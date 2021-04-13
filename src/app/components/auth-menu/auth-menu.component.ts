@@ -16,9 +16,9 @@ export class AuthMenuComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private toastrService: ToastrService,
     private router: Router
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   isAuth() {
     return this.authService.isAuthenticated();
