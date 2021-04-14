@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Customer } from '../models/customer';
+import { CustomerDetail } from '../models/details/customerDetail';
 import { TokenModel } from '../models/tokenModel';
 
 @Injectable({
@@ -23,11 +23,11 @@ export class LocalStorageService {
     localStorage.removeItem(this.tokenKey);
   }
 
-  setCurrentCustomer(currentCustomerValue: Customer) {
+  setCurrentCustomer(currentCustomerValue: CustomerDetail) {
     localStorage.setItem(this.currentCustomer, JSON.stringify(currentCustomerValue));
   }
 
-  getCurrentCustomer(): Customer {
+  getCurrentCustomer(): CustomerDetail {
     return JSON.parse(localStorage.getItem(this.currentCustomer));
   }
 

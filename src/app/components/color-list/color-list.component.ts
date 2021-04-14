@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
-import { Color } from 'src/app/models/color';
+import { Color } from 'src/app/models/entities/color';
 import { ColorService } from 'src/app/services/color.service';
 
 @Component({

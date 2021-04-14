@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ListResponseModel } from '../models/listResponseModel';
-import { Rental } from '../models/rental';
-import { ResponseModel } from '../models/responseModel';
+import { ListResponseModel } from '../models/responses/listResponseModel';
+import { Rental } from '../models/entities/rental';
+import { ResponseModel } from '../models/responses/responseModel';
+import { RentalDetail } from '../models/details/rentalDetail';
 
 @Injectable({
   providedIn: 'root',
@@ -17,19 +18,19 @@ export class RentalService {
     this.getRental();
   }
 
-  getRental(): Observable<ListResponseModel<Rental>> {
+  getRental(): Observable<ListResponseModel<RentalDetail>> {
     let newPath = this.apiUrl + 'rentals/getrentaldetail';
-    return this.httpClient.get<ListResponseModel<Rental>>(newPath);
+    return this.httpClient.get<ListResponseModel<RentalDetail>>(newPath);
   }
 
-  getRentalByCarId(carId: number): Observable<ListResponseModel<Rental>> {
+  getRentalByCarId(carId: number): Observable<ListResponseModel<RentalDetail>> {
     let newPath = this.apiUrl + 'rentals/getrentaldetailbycarid?carId=' + carId;
-    return this.httpClient.get<ListResponseModel<Rental>>(newPath);
+    return this.httpClient.get<ListResponseModel<RentalDetail>>(newPath);
   }
 
-  getRentalByCustomerId(customerId: number): Observable<ListResponseModel<Rental>> {
+  getRentalByCustomerId(customerId: number): Observable<ListResponseModel<RentalDetail>> {
     let newPath = this.apiUrl + 'rentals/getrentaldetailbycustomerid?customerId=' + customerId;
-    return this.httpClient.get<ListResponseModel<Rental>>(newPath);
+    return this.httpClient.get<ListResponseModel<RentalDetail>>(newPath);
   }
 
   addRental(rental: Rental) {

@@ -1,0 +1,98 @@
+<!-- <div class="col-lg-12">
+   <table class="table table-hover table-striped border mt-4">
+      <thead>
+         <tr>
+            <th class="text-center" style="width: 50px">#</th>
+            <th>Araba</th>
+            <th>Müşteri</th>
+            <th>Kiralanan Tarih</th>
+            <th>Teslim Tarihi</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr *ngFor="let rental of rentDetails">
+            <th class="text-center">{{ rental.rentalId }}</th>
+            <td>{{ rental.brandName }} {{ rental.carModelYear }}</td>
+            <td>{{ rental.firstName }} {{ rental.lastName }}</td>
+            <td>{{ rental.rentDate | date:'dd.MM.y hh:mm' }}</td>
+            <td>
+               <span *ngIf="rental.returnDate">{{ rental.returnDate | date:'dd.MM.y hh:mm' }}</span>
+               <span *ngIf="!rental.returnDate">Teslim tarihi bilinmiyor</span>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div> -->
+
+<div class="container mt-3">
+   <mat-toolbar>
+      <mat-icon>menu</mat-icon>
+      <span>RentACar</span>
+      <mat-icon>navigate_next</mat-icon>
+      <span>Kiralanan Araç Listesi</span>
+      <span class="example-spacer"></span>
+      <mat-icon>car_rental</mat-icon>
+   </mat-toolbar>
+   <div class="search-div">
+      <button mat-raised-button>
+         <mat-icon>search</mat-icon>Kiralama Ara
+      </button>
+      <mat-form-field class="search-form-field">
+         <input matInput [(ngModel)]="searchKey" placeholder="Kiralama Ara" autocomplete="off" (keyup)="applyFilter()">
+         <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+            <mat-icon>close</mat-icon>
+         </button>
+      </mat-form-field>
+   </div>
+   <div class="mat-elevation-z8 mt-3 mb-3">
+      <mat-table [dataSource]="listData" matSort>
+
+         <ng-container matColumnDef="rentalId">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.rentalId}} </mat-cell>
+         </ng-container>
+
+         <ng-container matColumnDef="araba">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Araba </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.brandName}} {{ element.carModelYear }}</mat-cell>
+         </ng-container>
+
+         <ng-container matColumnDef="musteri">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Müşteri </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.firstName}} {{ element.lastName }}</mat-cell>
+         </ng-container>
+
+         <ng-container matColumnDef="kiralamaTarih">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Kiralanan Tarih </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.rentDate | date:'dd.MM.y hh:mm' }}</mat-cell>
+         </ng-container>
+
+         <ng-container matColumnDef="teslimTarih">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Teslim Tarihi </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+               <span *ngIf="element.returnDate">{{ element.returnDate | date:'dd.MM.y hh:mm' }}</span>
+               <span *ngIf="!element.returnDate">Teslim tarihi bilinmiyor</span>
+            </mat-cell>
+         </ng-container>
+
+         <ng-container matColumnDef="loading">
+            <mat-footer-cell *matFooterCellDef="let row" colspan="6">
+               Loading Data...
+            </mat-footer-cell>
+         </ng-container>
+         <ng-container matColumnDef="noData">
+            <mat-footer-cell *matFooterCellDef="let row" colspan="6">
+               No data.
+            </mat-footer-cell>
+         </ng-container>
+         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+         <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+         <mat-footer-row *matFooterRowDef="['noData']"
+            [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}">
+         </mat-footer-row>
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+   </div>
+</div>

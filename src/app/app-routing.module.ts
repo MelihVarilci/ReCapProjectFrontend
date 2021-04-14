@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrandListComponent } from './components/brand-list/brand-list.component';
-import { CarAddComponent } from './components/car-add/car-add.component';
-import { CarDetailComponent } from './components/car-detail/car-detail.component';
-import { CarUpdateComponent } from './components/car-update/car-update.component';
+import { CarAddComponent } from './components/car/car-add/car-add.component';
+import { CarDetailComponent } from './components/car/car-detail/car-detail.component';
+import { CarUpdateComponent } from './components/car/car-update/car-update.component';
 import { CarComponent } from './components/car/car.component';
 import { ColorListComponent } from './components/color-list/color-list.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/auth/login/login.component';
 import { PaymentComponent } from './components/payment/payment.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { RegisterComponent } from './components/register/register.component';
-import { RentalManagementComponent } from './components/rental-management/rental-management.component';
-import { RentalComponent } from './components/rental/rental.component';
+import { ProfileComponent } from './components/auth/profile/profile.component';
+import { RegisterComponent } from './components/auth/register/register.component';
+import { RentalManagementComponent } from './components/auth/rental-management/rental-management.component';
+import { RentalComponent } from './components/car/car-detail/rental/rental.component';
 import { LoginGuard } from "./guards/login.guard";
 
 const routes: Routes = [

@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Customer } from '../models/customer';
+import { Customer } from '../models/entities/customer';
 import { LoginModel } from '../models/loginModel';
-import { RegisterModel } from '../models/register';
-import { SingleResponseModel } from '../models/singleResponseModel';
+import { RegisterModel } from '../models/registerModel';
+import { SingleResponseModel } from '../models/responses/singleResponseModel';
 import { TokenModel } from '../models/tokenModel';
 import { LocalStorageService } from './local-storage.service';
 

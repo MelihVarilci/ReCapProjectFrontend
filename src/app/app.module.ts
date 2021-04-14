@@ -4,13 +4,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from '@angular/platform-browser';
 
-import { CarDetailComponent } from './components/car-detail/car-detail.component';
-import { CarFilterComponent } from './components/car-filter/car-filter.component';
-import { CustomerComponent } from './components/customer/customer.component';
-import { RentalComponent } from './components/rental/rental.component';
-import { BrandComponent } from './components/brand/brand.component';
-import { ColorComponent } from './components/color/color.component';
-import { NaviComponent } from './components/navi/navi.component';
+import { CarDetailComponent } from './components/car/car-detail/car-detail.component';
+import { CarFilterComponent } from './components/car/car-filter/car-filter.component';
+import { RentalComponent } from './components/car/car-detail/rental/rental.component';
+import { NaviComponent } from './components/master/navi/navi.component';
 import { CarComponent } from './components/car/car.component';
 
 import { FilterBrandPipePipe } from './pipes/filter-brand-pipe.pipe';
@@ -22,18 +19,18 @@ import { AppComponent } from './app.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 
-import { RentalManagementComponent } from './components/rental-management/rental-management.component';
-import { CardSavedComponent } from './components/card-saved/card-saved.component';
-import { CarUpdateComponent } from './components/car-update/car-update.component';
+import { RentalManagementComponent } from './components/auth/rental-management/rental-management.component';
+import { CardSavedComponent } from './components/payment/card-saved/card-saved.component';
+import { CarUpdateComponent } from './components/car/car-update/car-update.component';
 import { BrandListComponent } from './components/brand-list/brand-list.component';
 import { ColorListComponent } from './components/color-list/color-list.component';
-import { AuthMenuComponent } from './components/auth-menu/auth-menu.component';
-import { RegisterComponent } from './components/register/register.component';
+import { AuthMenuComponent } from './components/master/navi/auth-menu/auth-menu.component';
+import { RegisterComponent } from './components/auth/register/register.component';
 import { PaymentComponent } from './components/payment/payment.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { CarAddComponent } from './components/car-add/car-add.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/auth/profile/profile.component';
+import { CarAddComponent } from './components/car/car-add/car-add.component';
+import { FooterComponent } from './components/master/footer/footer.component';
+import { LoginComponent } from './components/auth/login/login.component';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -47,13 +44,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
+import { MasterComponent } from './components/master/master.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BrandComponent,
-    ColorComponent,
-    CustomerComponent,
+    MasterComponent,
     CarComponent,
     RentalComponent,
     NaviComponent,

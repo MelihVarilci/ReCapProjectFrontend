@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Car } from 'src/app/models/car';
-import { Customer } from 'src/app/models/customer';
-import { FakeCard } from 'src/app/models/fakeCard';
-import { Rental } from 'src/app/models/rental';
+import { CarDetail } from 'src/app/models/details/carDetail';
+import { Car } from 'src/app/models/entities/car';
+import { Customer } from 'src/app/models/entities/customer';
+import { FakeCard } from 'src/app/models/entities/fakeCard';
+import { Rental } from 'src/app/models/entities/rental';
 import { CarService } from 'src/app/services/car.service';
 import { FakecardService } from 'src/app/services/fakecard.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -17,7 +18,7 @@ import { RentalService } from 'src/app/services/rental.service';
   styleUrls: ['./payment.component.css'],
 })
 export class PaymentComponent implements OnInit {
-  cars: Car;
+  carDetail: CarDetail;
   rental: Rental;
   customer: Customer;
   getCustomerId: number;
@@ -51,7 +52,7 @@ export class PaymentComponent implements OnInit {
     this.carService
       .getCarDetailsByCarId(this.rental.carId)
       .subscribe((response) => {
-        this.cars = response.data[0];
+        this.carDetail = response.data;
         this.paymentCalculator();
       });
   }
@@ -74,7 +75,7 @@ export class PaymentComponent implements OnInit {
       var difference = date1.getTime() - date2.getTime();
       var numberOfDays = Math.ceil(difference / (1000 * 3600 * 24));
 
-      this.amountOfPayment = numberOfDays * this.cars.carDailyPrice;
+      this.amountOfPayment = numberOfDays * this.carDetail.carDailyPrice;
       if (this.amountOfPayment <= 0) {
         this.router.navigate(['/cars']);
         this.toastrService.error(

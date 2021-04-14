@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Car } from 'src/app/models/car';
+import { CarDetail } from 'src/app/models/details/carDetail';
+import { Car } from 'src/app/models/entities/car';
 import { CarService } from 'src/app/services/car.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { CarService } from 'src/app/services/car.service';
   styleUrls: ['./car.component.css']
 })
 export class CarComponent implements OnInit {
-  cars: Car[] = [];
+  cars: CarDetail[] = [];
   apiUrl: string = "https://localhost:44352";
   dataLoaded = false;
 

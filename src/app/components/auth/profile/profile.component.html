@@ -1,0 +1,168 @@
+<div class="container mt-5 mb-5">
+   <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-12 mb-2">
+         <div class="card">
+            <div class="card-header user-heading p-4">
+               <div class="element d-flex justify-content-center" (click)="addFoto()">
+                  <mat-icon class="material-icons md-100">add_a_photo</mat-icon>
+                  <input type="file" name="" id="addFotograph">
+               </div>
+               <div class="card-body" style="text-align: center;">
+                  <h1 class="card-title">{{customerToUpdate.firstName+" "+ customerToUpdate.lastName}}</h1>
+                  <h2 class="card-text">{{customerToUpdate.companyName}}</h2>
+               </div>
+            </div>
+            <div class="card-body p-0">
+               <div class="list-group">
+                  <a class="list-group-item list-group-item-action d-flex justify-content-between">
+                     <label>Kullanıcı Adı</label>
+                     {{customerToUpdate.firstName+" "+customerToUpdate.lastName}}
+                  </a>
+                  <a class="list-group-item list-group-item-action d-flex justify-content-between">
+                     <label>Findex Puanı</label>
+                     <span [style]="setFindexColor()">{{customerToUpdate.findexPoint}}</span>
+                  </a>
+                  <a class="list-group-item list-group-item-action d-flex justify-content-between">
+                     <label>E-Posta</label>
+                     <span>{{customerToUpdate.email}}</span> </a>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-lg-9 col-md-9 col-sm-12 mb-2">
+         <div class="row">
+            <mat-accordion class="example-headers-align">
+               <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                  <mat-expansion-panel-header>
+                     <mat-panel-title>
+                        Profil Güncelle
+                     </mat-panel-title>
+                     <mat-panel-description>
+                        Kişisel bilgilerini güncelle
+                        <mat-icon>account_circle</mat-icon>
+                     </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <form [formGroup]="customerUpdateForm" (ngSubmit)="update()">
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <div class="form-floating mb-3">
+                              <input type="text" class="form-control" id="firstName" formControlName="firstName"
+                                 placeholder="firstName">
+                              <label for="firstName">Adınız *</label>
+                           </div>
+                        </div>
+                        <div class="col-lg-6">
+                           <div class="form-floating mb-3">
+                              <input type="text" class="form-control" id="lastName" formControlName="lastName"
+                                 placeholder="lastName">
+                              <label for="lastName">Soyadınız *</label>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="companyName" formControlName="companyName"
+                           placeholder="companyName">
+                        <label for="companyName">Şirket Adı</label>
+                     </div>
+                     <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="email" formControlName="email" placeholder="email">
+                        <label for="email">E-Posta Adresiniz *</label>
+                     </div>
+                     <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="password" formControlName="password"
+                           placeholder="password">
+                        <label for="password">Şifreniz *</label>
+                     </div>
+                     <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="confirmPassword"
+                           formControlName="confirmPassword" placeholder="confirmPassword">
+                        <label for="confirmPassword">Şifrenizi Onaylayın *</label>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6 my-auto text-start">
+                           <i class="bi-bullseye ms-1"></i> RAC &copy;
+                        </div>
+                        <div class="col-lg-6">
+                           <div class="d-grid">
+                              <button class="btn btn-primary rounded-0">
+                                 <i class="bi-plus-square me-1"></i> Güncelle
+                              </button>
+                           </div>
+                        </div>
+                     </div>
+                  </form>
+                  <mat-action-row>
+                     <button mat-button color="primary" (click)="nextStep()">Sonraki</button>
+                  </mat-action-row>
+               </mat-expansion-panel>
+
+               <!-- <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+                  <mat-expansion-panel-header>
+                     <mat-panel-title>
+                        Destination
+                     </mat-panel-title>
+                     <mat-panel-description>
+                        Type the country name
+                        <mat-icon>map</mat-icon>
+                     </mat-panel-description>
+                  </mat-expansion-panel-header>
+
+                  <mat-form-field>
+                     <mat-label>Country</mat-label>
+                     <input matInput>
+                  </mat-form-field>
+
+                  <mat-action-row>
+                     <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                     <button mat-button color="primary" (click)="nextStep()">Next</button>
+                  </mat-action-row>
+               </mat-expansion-panel> -->
+
+               <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+                  <mat-expansion-panel-header>
+                     <mat-panel-title>
+                        Kiramalarım
+                     </mat-panel-title>
+                     <mat-panel-description>
+                        Inform the date you wish to travel
+                        <mat-icon>date_range</mat-icon>
+                     </mat-panel-description>
+                  </mat-expansion-panel-header>
+
+                  <table class="table table-striped table-hover">
+                     <thead>
+                        <tr>
+                           <th>#</th>
+                           <th class="text-center" style="width: 50px">Id</th>
+                           <th>Araba</th>
+                           <th>Müşteri</th>
+                           <th>Kiralanan Tarih</th>
+                           <th>Teslim Tarihi</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr *ngFor="let rental of rentals; let i = index">
+                           <th>{{i+1}}</th>
+                           <th class="text-center">{{ rental.rentalId }}</th>
+                           <td>{{ rental.brandName }} {{ rental.carModelYear }}</td>
+                           <td>{{ rental.firstName }} {{ rental.lastName }}</td>
+                           <td>{{ rental.rentDate | date:'dd.MM.y hh:mm' }}</td>
+                           <td>
+                              <span *ngIf="rental.returnDate" [style]="setReturnDateColor()">{{ rental.returnDate | date:'dd.MM.y hh:mm' }}</span>
+                              <span *ngIf="!rental.returnDate" [style]="setReturnDateColor()">Teslim tarihi bilinmiyor</span>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+                  <mat-datepicker #picker></mat-datepicker>
+
+                  <mat-action-row>
+                     <button mat-button color="warn" (click)="prevStep()">Önceki</button>
+                  </mat-action-row>
+               </mat-expansion-panel>
+
+            </mat-accordion>
+         </div>
+      </div>
+   </div>
+</div>

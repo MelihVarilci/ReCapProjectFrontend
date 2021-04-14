@@ -1,4 +1,4 @@
-<div *ngIf="cars" class="card mt-4">
+<div *ngIf="carDetail" class="card mt-4">
   <div class="card-header text-center">
     <strong>İşlem Özeti</strong>
   </div>
@@ -19,10 +19,10 @@
         <tr>
           <td>{{ rental.rentDate }}</td>
           <td>{{ rental.returnDate }}</td>
-          <td>{{ cars.brandName }}</td>
-          <td>{{ cars.colorName }}</td>
-          <td>{{ cars.carModelYear }}</td>
-          <td>{{ cars.carDailyPrice | currency: "₺" }}</td>
+          <td>{{ carDetail.brandName }}</td>
+          <td>{{ carDetail.colorName }}</td>
+          <td>{{ carDetail.carModelYear }}</td>
+          <td>{{ carDetail.carDailyPrice | currency: "₺" }}</td>
           <td>
             <strong class="text-danger">{{
               amountOfPayment | currency: "₺"
