@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Car } from 'src/app/models/car';
 import { Customer } from 'src/app/models/customer';
+import { Rental } from 'src/app/models/rental';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { RentalService } from 'src/app/services/rental.service';
+
+declare var $: any;
 
 @Component({
   selector: 'app-profile',
@@ -15,22 +18,35 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 export class ProfileComponent implements OnInit {
   customerToUpdate: Customer;
   customerUpdateForm: FormGroup;
+  rentals: Rental[] = [];
+  returnDate: Date;
+  step = 0;
 
   constructor(
     private localStorageService: LocalStorageService,
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private rentalService: RentalService
   ) { }
 
   ngOnInit(): void {
     this.getCustomer();
+    this.getRentalByCustomer();
     this.createCustomerUpdateForm();
   }
 
   getCustomer() {
     this.customerToUpdate = this.localStorageService.getCurrentCustomer();
+  }
+
+  getRentalByCustomer() {
+    this.rentalService.getRentalByCustomerId(this.customerToUpdate.customerId).subscribe(
+      (responseSuccess) => {
+        this.rentals = responseSuccess.data;
+        this.returnDate = (responseSuccess.data[0].returnDate);
+      })
   }
 
   createCustomerUpdateForm() {
@@ -74,5 +90,31 @@ export class ProfileComponent implements OnInit {
         this.toastrService.error(responseError.error.StatusCode + ' ' + responseError.error.Message, responseError.name);
       }
     );
+  }
+
+  setStep(index: number) {
+    this.step = index;
+  }
+  nextStep() {
+    this.step++;
+  }
+  prevStep() {
+    this.step--;
+  }
+  addFoto() {
+    document.getElementById("addFotograph").click();
+  }
+  setFindexColor() {
+    if (this.customerToUpdate.findexPoint < 100) {
+      return "color:red;";
+    }
+    return "color:green;";
+  }
+  setReturnDateColor() {
+    let now = new Date();
+    if (this.returnDate > now) {
+      return "color: green;";
+    }
+    return "color:red;";
   }
 }
