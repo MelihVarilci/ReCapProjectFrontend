@@ -1,4 +1,4 @@
-<div class="container mt-4">
+<!-- <div class="container mt-4">
   <div class="row d-flex justify-content-center">
     <div class="col-md-9">
       <div *ngIf="dataLoaded == false" class="d-flex justify-content-center">
@@ -7,24 +7,28 @@
       <div>
         <app-car-filter></app-car-filter>
         <div class="row">
-          <div *ngFor="let car of cars" class="col-md-4 mb-4">
+          <div *ngFor="let car of carDetail" class="col-md-4 mb-4">
             <div class="card h-100">
               <img src="{{ apiUrl }}{{ car.carImages[0].imagePath }}" class="card-img-top" width="%100" />
               <div class="card-body">
                 <ul ul class="list-group list-group-flush mt-3">
-                  <li class="list-group-item">Model: {{ car.carModelYear }}</li>
-                  <li class="list-group-item">Marka: {{ car.brandName }}</li>
-                  <li class="list-group-item">
-                    Günlük Fiyat: {{ car.carDailyPrice }} ₺
+                  <li class="list-group-item d-flex justify-content-between"><label>Model:</label> {{ car.carModelYear
+                    }}</li>
+                  <li class="list-group-item d-flex justify-content-between"><label>Marka:</label> {{ car.brandName }}
                   </li>
-                  <li class="list-group-item">
-                    Araba Rengi: {{ car.colorName }}
+                  <li class=" list-group-item d-flex justify-content-between">
+                    <label>Günlük Fiyat:</label> {{ car.carDailyPrice }} ₺
                   </li>
-                  <li class="list-group-item">Findeks Puanı: {{ car.findexPoint }}</li>
+                  <li class="list-group-item d-flex justify-content-between">
+                    <label>Araba Rengi:</label> {{ car.colorName }}
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between"><label>Findeks Puanı:</label> {{
+                    car.findexPoint
+                    }}</li>
                 </ul>
               </div>
               <div class="card-footer">
-                <button class="btn btn-secondary" routerLink="cardetail/{{ car.carId }}">
+                <button class="btn btn-secondary" routerLink="/cardetail/{{ car.carId }}">
                   İncele
                 </button>
               </div>
@@ -37,4 +41,49 @@
       </div>
     </div>
   </div>
+</div> -->
+
+
+<div class="mt-3 mb-3 col-12">
+  <app-car-filter></app-car-filter>
+  <div class="row">
+    <div class="example-card col-lg-3 col-md-4 col-sm-6 col-12 mb-4" *ngFor="let carDetail of obs | async">
+      <div class="card h-100">
+        <img src="{{ apiUrl }}{{ carDetail.carImages[0].imagePath }}" class="card-img-top" width="%100" />
+        <div class="card-body">
+          <ul ul class="list-group list-group-flush mt-3">
+            <li class="list-group-item d-flex justify-content-between"><label>Model:</label> {{ carDetail.carModelYear
+              }}</li>
+            <li class="list-group-item d-flex justify-content-between"><label>Marka:</label> {{ carDetail.brandName }}
+            </li>
+            <li class=" list-group-item d-flex justify-content-between">
+              <label>Günlük Fiyat:</label> {{ carDetail.carDailyPrice }} ₺
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <label>Araba Rengi:</label> {{ carDetail.colorName }}
+            </li>
+            <li class="list-group-item d-flex justify-content-between"><label>Findeks Puanı:</label> {{
+              carDetail.findexPoint
+              }}</li>
+          </ul>
+        </div>
+        <div class="card-footer">
+          <button mat-button color="primary" routerLink="/cardetail/{{ carDetail.carId }}">İncele</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-container matColumnDef="loading">
+    <mat-footer-cell *matFooterCellDef="let row" colspan="8">
+      Loading Data...
+    </mat-footer-cell>
+  </ng-container>
+  <ng-container matColumnDef="noData">
+    <mat-footer-cell *matFooterCellDef="let row" colspan="8">
+      No data.
+    </mat-footer-cell>
+  </ng-container>
+
+  <mat-paginator [pageSizeOptions]="[8, 16, 24]" [pageSize]="8" showFirstLastButtons></mat-paginator>
 </div>

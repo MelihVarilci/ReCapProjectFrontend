@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
-  FormControl,
   FormBuilder,
-  Validator,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CustomerDetail } from 'src/app/models/details/customerDetail';
-import { Customer } from 'src/app/models/entities/customer';
 import { LoginModel } from 'src/app/models/loginModel';
 import { AuthService } from 'src/app/services/auth.service';
 import { CustomerService } from 'src/app/services/customer.service';
@@ -29,7 +25,6 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private toastrService: ToastrService,
-    private router: Router,
     private localStorageService: LocalStorageService,
     private customerService: CustomerService
   ) { }

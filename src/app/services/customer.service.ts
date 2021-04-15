@@ -26,6 +26,7 @@ export class CustomerService {
 
   getCustomerByEmail(email: string): Observable<SingleResponseModel<CustomerDetail>> {
     let newPath = this.apiUrl + 'customers/getcustomerbyemail?email=' + email;
+    console.log(this.httpClient.get<SingleResponseModel<CustomerDetail>>(newPath));
     return this.httpClient.get<SingleResponseModel<CustomerDetail>>(newPath);
   }
 

@@ -1,11 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CarDetail } from 'src/app/models/details/carDetail';
 import { RentalDetail } from 'src/app/models/details/rentalDetail';
 import { Customer } from 'src/app/models/entities/customer';
-import { CustomerService } from 'src/app/services/customer.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({

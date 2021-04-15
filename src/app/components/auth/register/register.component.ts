@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CustomerDetail } from 'src/app/models/details/customerDetail';
-import { Customer } from 'src/app/models/entities/customer';
 import { RegisterModel } from 'src/app/models/registerModel';
 import { AuthService } from 'src/app/services/auth.service';
 import { CustomerService } from 'src/app/services/customer.service';
@@ -54,10 +53,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
     delete this.registerForm.value['confirmPassword'];
-    let registerModel: RegisterModel = Object.assign(
-      {},
-      this.registerForm.value
-    );
+    let registerModel: RegisterModel = Object.assign({},this.registerForm.value);
     this.authService.register(registerModel).subscribe(
       (responseSuccess) => {
         this.localStorageService.setToken(responseSuccess.data);

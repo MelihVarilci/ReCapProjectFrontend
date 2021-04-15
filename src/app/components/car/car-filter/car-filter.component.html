@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="mb-2 col-4">
+  <div class="mb-2 col-lg-4 col-md-6 col-12">
     <select class="form-select rounded-0" [(ngModel)]="brandIdFilter">
       <option value="">Marka Seçiniz</option>
 
@@ -9,7 +9,7 @@
     </select>
   </div>
 
-  <div class="mb-2 col-4">
+  <div class="mb-2 col-lg-4 col-md-6 col-12">
     <select class="form-select rounded-0" [(ngModel)]="colorIdFilter">
       <option value="">Renk Seçiniz</option>
 
@@ -18,15 +18,15 @@
       </option>
     </select>
   </div>
-  <div class="row col-4">
-    <div class="col-lg mb-3 mb-lg-0">
+  <div class="row col-lg-4 col-md-12 col-12 m-0">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-3 mb-lg-0">
       <div class="d-grid">
         <button class="btn btn-outline-primary" routerLink="/cars" (click)="clearFilter()">
           <i class="bi-backspace me-1"></i> Temizle
         </button>
       </div>
     </div>
-    <div class="col-lg">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-12">
       <div class="d-grid">
         <button class="btn btn-primary" (click)="setFilteredRoute(brandIdFilter,colorIdFilter)">
           <i class="bi-search me-1"></i> Filtrele

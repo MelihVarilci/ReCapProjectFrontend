@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CarDetail } from 'src/app/models/details/carDetail';
-import { Car } from 'src/app/models/entities/car';
 import { Customer } from 'src/app/models/entities/customer';
 import { FakeCard } from 'src/app/models/entities/fakeCard';
 import { Rental } from 'src/app/models/entities/rental';

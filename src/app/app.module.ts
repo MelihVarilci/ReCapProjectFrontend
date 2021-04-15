@@ -33,6 +33,7 @@ import { FooterComponent } from './components/master/footer/footer.component';
 import { LoginComponent } from './components/auth/login/login.component';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MasterComponent } from './components/master/master.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -44,48 +45,50 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
-import { MasterComponent } from './components/master/master.component';
+import { MatCardModule } from '@angular/material/card';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-    MasterComponent,
-    CarComponent,
-    RentalComponent,
-    NaviComponent,
-    CarDetailComponent,
+    RentalManagementComponent,
     FilterBrandPipePipe,
     FilterColorPipePipe,
+    CarDetailComponent,
     CarFilterComponent,
-    PaymentComponent,
-    CarAddComponent,
     CarUpdateComponent,
     BrandListComponent,
     ColorListComponent,
-    LoginComponent,
+    CardSavedComponent,
     AuthMenuComponent,
     RegisterComponent,
     ProfileComponent,
-    RentalManagementComponent,
-    CardSavedComponent,
-    FooterComponent
+    PaymentComponent,
+    MasterComponent,
+    FooterComponent,
+    RentalComponent,
+    CarAddComponent,
+    LoginComponent,
+    NaviComponent,
+    AppComponent,
+    CarComponent,
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
     MatProgressSpinnerModule,
-    MatPaginatorModule,
-    MatFormFieldModule,
-    MatTableModule,
-    MatSortModule,
-    MatIconModule,
-    MatInputModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatExpansionModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatExpansionModule,
+    AppRoutingModule,
+    MatToolbarModule,
     HttpClientModule,
+    MatButtonModule,
+    MatTableModule,
+    MatInputModule,
+    BrowserModule,
+    MatSortModule,
+    MatIconModule,
+    MatCardModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

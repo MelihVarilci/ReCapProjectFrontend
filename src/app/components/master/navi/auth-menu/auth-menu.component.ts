@@ -11,6 +11,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
   styleUrls: ['./auth-menu.component.css'],
 })
 export class AuthMenuComponent implements OnInit {
+  
   constructor(
     private authService: AuthService,
     private localStorageService: LocalStorageService,

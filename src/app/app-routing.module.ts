@@ -28,25 +28,25 @@ const routes: Routes = [
       { path: "color/:colorId/cars/cardetail/:carId", component: CarComponent },
 
       { path: "update/:carId", component: CarUpdateComponent },
-      { path: "cardetail/:carId", component: CarDetailComponent },
 
       { path: "add", component: CarAddComponent, canActivate: [LoginGuard] },
     ]
   },
   {
     path: "auth", children: [
-      { path: "login", component: LoginComponent },
+      { path: "rentals", component: RentalManagementComponent },
       { path: "register", component: RegisterComponent },
       { path: "profile", component: ProfileComponent },
-      { path: "rentals", component: RentalManagementComponent },
+      { path: "login", component: LoginComponent },
     ]
   },
-
+  
   { path: "brand/list", component: BrandListComponent, canActivate: [LoginGuard] },
   { path: "color/list", component: ColorListComponent, canActivate: [LoginGuard] },
-
-  { path: "rental/:carId", component: RentalComponent },
+  
+  { path: "cardetail/:carId", component: CarDetailComponent },
   { path: "payment/:rental", component: PaymentComponent },
+  { path: "rental/:carId", component: RentalComponent },
 ];
 
 @NgModule({
