@@ -1,5 +1,7 @@
 # Recap
 
+ <img src="https://github.com/MelihVarilci/ReCapProjectFrontend/blob/main/src/assets/images/RentACar.gif" width="100%" height="auto">
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.3.
 
 ## Development server
