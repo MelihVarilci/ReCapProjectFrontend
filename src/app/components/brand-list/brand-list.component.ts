@@ -74,7 +74,7 @@ export class BrandListComponent implements OnInit {
   }
 
   deleteCreateForm() {
-    this.brandUpdateForm = this.formBuilder.group({
+    this.brandDeleteForm = this.formBuilder.group({
       brandId: [this.brand.brandId, [Validators.required]],
       brandName: [this.brand.brandName, [Validators.required]],
     });

@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -28,7 +29,7 @@ export class ProfileComponent implements OnInit {
     private toastrService: ToastrService,
     private authService: AuthService,
     private router: Router,
-    private rentalService: RentalService
+    private rentalService: RentalService,
   ) { }
 
   ngOnInit(): void {
@@ -56,7 +57,8 @@ export class ProfileComponent implements OnInit {
       companyName: [this.customerToUpdate.companyName],
       email: [this.customerToUpdate.email, [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-      confirmPassword: ['', [Validators.required]]
+      confirmPassword: ['', [Validators.required]],
+      findexPoint: [this.customerToUpdate.findexPoint]
     });
   }
 
@@ -110,11 +112,12 @@ export class ProfileComponent implements OnInit {
     }
     return "color:green;";
   }
-  setReturnDateColor() {
-    let now = new Date();
-    if (this.returnDate > now) {
+  setReturnDateColor(setReturnDate:Date) {
+    let now = new Date(Date.now());
+    var checkReturnDate = new Date(setReturnDate.toString());
+    if (checkReturnDate > now) {
       return "color: green;";
     }
-    return "color:red;";
+    return "color: red;";
   }
 }

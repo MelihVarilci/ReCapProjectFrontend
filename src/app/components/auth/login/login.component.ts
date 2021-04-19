@@ -60,7 +60,6 @@ export class LoginComponent implements OnInit {
         this.localStorageService.setToken(responseSuccess.data);
         this.getCustomerByEmail(loginModel.email);
 
-        return window.location.replace('/cars');
       },
       (responseError) => {
         return this.toastrService.error(responseError.error, 'Hata');
@@ -72,6 +71,7 @@ export class LoginComponent implements OnInit {
     this.customerService.getCustomerByEmail(email).subscribe((response) => {
       this.customerDetail = response.data;
       this.localStorageService.setCurrentCustomer(this.customerDetail);
+      window.location.replace('/cars');
     });
   }
 }

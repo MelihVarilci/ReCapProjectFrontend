@@ -148,8 +148,8 @@
                            <td>{{ rental.firstName }} {{ rental.lastName }}</td>
                            <td>{{ rental.rentDate | date:'dd.MM.y hh:mm' }}</td>
                            <td>
-                              <span *ngIf="rental.returnDate" [style]="setReturnDateColor()">{{ rental.returnDate | date:'dd.MM.y hh:mm' }}</span>
-                              <span *ngIf="!rental.returnDate" [style]="setReturnDateColor()">Teslim tarihi bilinmiyor</span>
+                              <span *ngIf="rental.returnDate" [style]="setReturnDateColor(rental.returnDate)">{{ rental.returnDate | date:'dd.MM.y hh:mm' }}</span>
+                              <span *ngIf="!rental.returnDate" [style]="setReturnDateColor(rental.returnDate)">Teslim tarihi bilinmiyor</span>
                            </td>
                         </tr>
                      </tbody>
